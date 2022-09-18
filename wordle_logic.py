@@ -5,13 +5,26 @@ class WordleLogic:
 
     def __init__(self, secret_word):
         self.secret_word = secret_word
-        self.guesses = []
-        self.attempts = 6
+        self.current_guess = ''
+        self.guess_history = []
+        self.total_guesses = 6
 
+    @property
+    def play_wordle(self):
+        return not self.user_wins and not self.game_over
+
+    @property
     def user_wins(self):
-        return self.secret_word in self.guesses
+        return self.current_guess == self.secret_word
+
+    @property
+    def game_over(self):
+        return len(self.guess_history) == self.total_guesses
             
-    def add_user_guess(self, user_guess):
+    def user_guess(self, user_guess):
+        self.guess_history.append(user_guess)
+        self.current_guess = user_guess
+
 # TODO: Randomly choose secret word from word_list
     # def pick_secret_word(self):
     #     # secret_word = random.choice(word_list) 
@@ -43,11 +56,8 @@ class WordleLogic:
 # If user guess = secret word, tell wordle_game user wins
 # If user guess != secret word and attempts = 6, tell wordle_game user loses
 # User quits
-    # def user_wins(self):
-    #     if self.secret_word in self.guesses:
-    #         return True
 
 # TODO: Game stats and highscore
 # Store game results when game ends 
 # Fastest time to solve, streaks, least attempts, attempt distribution
-# Provide stats to wordle_game if user requests
+# # Provide stats to wordle_game if user requests
