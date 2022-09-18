@@ -3,16 +3,20 @@ from wordle_logic import WordleLogic
 # Interface between user and game. 
 
 # TODO: Welcome user to game, options for quit, rules, stats, game options
-def game_start():
+def wordle_game():
     print("Welcome to PyWordle...")
     wordle = WordleLogic(secret_word='CRATE')
     while wordle.play_wordle:
         wordle.user_guess(input("Enter a 5 letter word.\n"))
-        print(wordle.current_guess)
-        print(wordle.secret_word)
+        print("current guess = " + wordle.current_guess) # debug
+        print("secret word = " + wordle.secret_word) # debug
+    
+    if wordle.user_wins:
+        print("You win!")
+    elif wordle.game_over:
+        print("Game over!")
 
-# TODO: Ask user for guess
-
+        
 
 # TODO: Dispaly user guess as colored result 
 def display_guess():
@@ -34,5 +38,5 @@ def display_stats():
 # Gameplay Loop
 
 if __name__ == '__main__':
-    game_start()
+    wordle_game()
     

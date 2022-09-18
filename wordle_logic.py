@@ -22,6 +22,7 @@ class WordleLogic:
         return len(self.guess_history) == self.total_guesses
             
     def user_guess(self, user_guess):
+        # if len(user_guess) == 5 and user_guess in word_list:
         self.guess_history.append(user_guess)
         self.current_guess = user_guess
 
