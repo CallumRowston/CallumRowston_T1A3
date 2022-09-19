@@ -10,7 +10,7 @@ class WordleLogic:
         self.current_guess = ''
         self.guess_history = []
         self.total_guesses = 6
-        self.word_length = 5       
+        self.word_length = 5
 
     @property
     def play_wordle(self):
@@ -31,16 +31,16 @@ class WordleLogic:
     def add_user_guess(self, user_guess):
         self.guess_history.append(user_guess)
         self.current_guess = user_guess
-    # Convert word to list
+
     def compare_user_guess(self):
         guess_result = []
         for char in range(5):
             if self.current_guess[char] == self.secret_word[char]:
-                guess_result.append(self.current_guess[char] + '=GREEN')
+                guess_result.append(self.current_guess[char] + 'green')
             elif self.current_guess[char] in self.secret_word:
-                guess_result.append(self.current_guess[char] + '=YELLOW')
+                guess_result.append(self.current_guess[char] + 'yellow')
             else:
-                guess_result.append(self.current_guess[char] + '=GREY')
+                guess_result.append(self.current_guess[char])
         return guess_result
 
 # TODO: Randomly choose secret word from word_list

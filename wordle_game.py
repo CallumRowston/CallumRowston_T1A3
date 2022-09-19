@@ -1,5 +1,5 @@
 from wordle_logic import WordleLogic
-
+from colorama import Fore
 # Interface between user and game. 
 
 # TODO: Welcome user to game, options for quit, rules, stats, game options
@@ -12,7 +12,8 @@ def main():
             print(f"Your guess must be {wordle.word_length} letters long.\n")
             continue
         wordle.add_user_guess(user_guess)
-        print(wordle.compare_user_guess())
+        # wordle.compare_user_guess()
+        display_colored_guess(wordle.compare_user_guess())
         print("current guess = " + wordle.current_guess) # debug
         print("secret word = " + wordle.secret_word) # debug
         
@@ -25,8 +26,18 @@ def main():
         
 
 # TODO: Dispaly user guess as colored result 
-def display_guess():
-    pass
+def display_colored_guess(guess):
+    colored_guess = []
+    for letter in guess:
+        if 'green' in letter:
+            color = Fore.GREEN
+        elif 'yellow' in letter:
+            color = Fore.YELLOW
+        else:
+            color = Fore.WHITE
+        colored_guess.append(color + letter[0] + Fore.RESET)
+    print("".join(colored_guess))
+
 
 # TODO: Display end game win/loss. Play again? Quit? 
 def end_menu():
