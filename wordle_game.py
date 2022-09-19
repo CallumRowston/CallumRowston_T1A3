@@ -5,14 +5,13 @@ from wordle_logic import WordleLogic
 # TODO: Welcome user to game, options for quit, rules, stats, game options
 def main():
     print("Welcome to PyWordle...")
-    wordle = WordleLogic(secret_word='CRATE')
+    wordle = WordleLogic()
     while wordle.play_wordle:
         user_guess = input("Enter a 5 letter word.\n").upper()
         if len(user_guess) != wordle.word_length:
             print(f"Your guess must be {wordle.word_length} letters long.\n")
             continue
         
-        wordle.validate_user_guess(user_guess)
         wordle.compare_user_guess()
         print("current guess = " + wordle.current_guess) # debug
         print("secret word = " + wordle.secret_word) # debug

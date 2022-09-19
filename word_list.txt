@@ -1,0 +1,10 @@
+crate
+spade
+laces
+mices
+paper
+loner
+cloud
+rhyme
+queen
+sweat

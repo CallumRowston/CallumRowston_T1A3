@@ -3,12 +3,15 @@ import random
 # All logic of game. Sends computed logic to wordle.game.
 class WordleLogic:
 
-    def __init__(self, secret_word):
-        self.secret_word = secret_word
+    def __init__(self):
+        with open('word_list.txt') as f:
+            self.secret_word = random.choice(f.readlines())
+            print(self.secret_word) # debug
         self.current_guess = ''
         self.guess_history = []
         self.total_guesses = 6
         self.word_length = 5
+        
 
     @property
     def play_wordle(self):
@@ -22,6 +25,9 @@ class WordleLogic:
     def game_over(self):
         return len(self.guess_history) == self.total_guesses
     
+    # def set_secret_word(self, file):
+        
+
     def validate_user_guess(self, user_guess):
         if len(user_guess) != self.word_length:
             print(f"Your guess must be {self.word_length} letters long.\n")
