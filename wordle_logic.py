@@ -1,6 +1,6 @@
 import random
 
-# All logic of game. Sends computed logic to wordle.game. 
+# All logic of game. Sends computed logic to wordle.game.
 class WordleLogic:
 
     def __init__(self, secret_word):
@@ -8,6 +8,7 @@ class WordleLogic:
         self.current_guess = ''
         self.guess_history = []
         self.total_guesses = 6
+        self.word_length = 5
 
     @property
     def play_wordle(self):
@@ -20,11 +21,27 @@ class WordleLogic:
     @property
     def game_over(self):
         return len(self.guess_history) == self.total_guesses
-            
-    def user_guess(self, user_guess):
+    
+    def validate_user_guess(self, user_guess):
+        if len(user_guess) != self.word_length:
+            print(f"Your guess must be {self.word_length} letters long.\n")
+        
+
+    def add_user_guess(self, user_guess):
         # if len(user_guess) == 5 and user_guess in word_list:
         self.guess_history.append(user_guess)
         self.current_guess = user_guess
+    # Convert word to list
+    def compare_user_guess(self):
+        colored_guess = []
+        for char in self.current_guess:
+            if self.current_guess[char] == self.secret_word[char]:
+                colored_guess.append(char + '=GREEN')
+            elif self.current_guess[char] in self.secret_word:
+                colored_guess.append(char + '=YELLOW')
+            else:
+                colored_guess.append(char + '=GREY')
+        print(colored_guess)
 
 # TODO: Randomly choose secret word from word_list
     # def pick_secret_word(self):
