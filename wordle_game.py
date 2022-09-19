@@ -11,8 +11,8 @@ def main():
         if len(user_guess) != wordle.word_length:
             print(f"Your guess must be {wordle.word_length} letters long.\n")
             continue
-        
-        wordle.compare_user_guess()
+        wordle.add_user_guess(user_guess)
+        print(wordle.compare_user_guess())
         print("current guess = " + wordle.current_guess) # debug
         print("secret word = " + wordle.secret_word) # debug
         
