@@ -59,9 +59,6 @@ class WordLengthError(Exception):
 class NotRealWordError(Exception):
     pass
 
-
-
-
 # TODO: Randomly choose secret word from word_list
     # def pick_secret_word(self):
     #     # secret_word = random.choice(word_list) 

@@ -25,7 +25,7 @@ def play_pywordle():
     print(wordle.secret_word) # debug
     while wordle.play_wordle:
         try:
-            user_guess = input("Enter a 5 letter word.\n").upper()
+            user_guess = input("Enter a 5 letter word.: ").upper()
             wordle.validate_user_guess(user_guess)
         except WordLengthError as err:
             print(err)
@@ -36,7 +36,6 @@ def play_pywordle():
             display_colored_guess(wordle.compare_user_guess())
             for _ in range(wordle.total_guesses - len(wordle.guess_history)):
                 print("  _  _  _  _  _")
-
             if wordle.user_wins:
                 print("You win!")
                 break
