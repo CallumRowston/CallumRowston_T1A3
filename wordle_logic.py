@@ -4,9 +4,8 @@ import random
 class WordleLogic:
 
     def __init__(self):
-        with open('word_list.txt') as f:
+        with open('word_list_5.txt') as f:
             self.secret_word = random.choice(f.readlines())
-            print(self.secret_word) # debug
         self.current_guess = ''
         self.guess_history = []
         self.total_guesses = 6

@@ -14,18 +14,16 @@ def main():
         wordle.add_user_guess(user_guess)
         # wordle.compare_user_guess()
         display_colored_guess(wordle.compare_user_guess())
+        if wordle.user_wins:
+            print("You win!")
+            break
+        if wordle.game_over:
+            print("You have used all your guesses. Game over!")
+            break
         print("current guess = " + wordle.current_guess) # debug
         print("secret word = " + wordle.secret_word) # debug
         
-    
-    if wordle.user_wins:
-        print("You win!")
-    elif wordle.game_over:
-        print("Game over!")
-
-        
-
-# TODO: Dispaly user guess as colored result 
+# TODO: Dispaly user guess as colored result
 def display_colored_guess(guess):
     colored_guess = []
     for letter in guess:
@@ -35,7 +33,7 @@ def display_colored_guess(guess):
             color = Fore.YELLOW
         else:
             color = Fore.WHITE
-        colored_guess.append(color + letter[0] + Fore.RESET)
+        colored_guess.append(color + "  " + letter[0] + Fore.RESET)
     print("".join(colored_guess))
 
 
