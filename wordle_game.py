@@ -1,10 +1,57 @@
 from wordle_logic import WordleLogic, WordLengthError, NotRealWordError
 from colorama import Fore
-# Interface between user and game. 
+from simple_term_menu import TerminalMenu
+# Interface between user and game.
 
 # TODO: Welcome user to game, options for quit, rules, stats, game options
-def main():
+def main_menu():
     print("Welcome to " + Fore.GREEN + "Py" + Fore.YELLOW + "Wordle" + Fore.RESET)
+    options = ["Play PyWordle", "Game Settings", "Stats", "Quit"]
+    main_menu = TerminalMenu(options)
+    menu_entry_index = main_menu.show()
+    print(f"You have selected {options[menu_entry_index]}!")
+    if options[menu_entry_index] == "Play PyWordle":
+        play_wordle()
+        #function to play wordle
+    elif options[menu_entry_index] == "Game Settings":
+        pass
+        #function to open game settings
+    elif options[menu_entry_index] == "Stats":
+        pass
+    elif options[menu_entry_index] == "Quit":
+        print("Quitting application...")
+
+
+
+
+
+
+
+        # wordle = WordleLogic()
+        # print(wordle.secret_word) # debug
+        # while wordle.play_wordle:
+        #     try:
+        #         user_guess = input("Enter a 5 letter word.\n").upper()
+        #         wordle.validate_user_guess(user_guess)
+        #     except WordLengthError as err:
+        #         print(err)
+        #     except NotRealWordError as err:
+        #         print(err)
+        #     else:
+        #         wordle.add_user_guess(user_guess)
+        #         display_colored_guess(wordle.compare_user_guess())
+        #         if wordle.user_wins:
+        #             print("You win!")
+        #             break
+        #         if wordle.user_loses:
+        #             print("You have used all your guesses. Game over!")
+        #             print(f"The correct word was {wordle.secret_word}")
+        #             break
+        #     # print("current guess = " + wordle.current_guess) # debug
+        #     # print("secret word = " + wordle.secret_word) # debug
+            
+# TODO: Dispaly user guess as colored result
+def play_wordle():
     wordle = WordleLogic()
     print(wordle.secret_word) # debug
     while wordle.play_wordle:
@@ -27,8 +74,9 @@ def main():
                 break
         # print("current guess = " + wordle.current_guess) # debug
         # print("secret word = " + wordle.secret_word) # debug
-        
-# TODO: Dispaly user guess as colored result
+
+
+
 def display_colored_guess(guess):
     colored_guess = []
     for letter in guess:
@@ -58,5 +106,5 @@ def display_stats():
 # Gameplay Loop
 
 if __name__ == '__main__':
-    main()
+    main_menu()
     
