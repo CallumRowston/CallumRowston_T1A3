@@ -43,15 +43,33 @@ class WordleLogic:
         self.current_guess = user_guess
 
     def compare_user_guess(self):
-        guess_result = []
-        for char in range(5):
-            if self.current_guess[char] == self.secret_word[char]:
-                guess_result.append(self.current_guess[char] + 'green')
-            elif self.current_guess[char] in self.secret_word:
-                guess_result.append(self.current_guess[char] + 'yellow')
-            else:
-                guess_result.append(self.current_guess[char])
+        save_secret_word = self.secret_word
+        guess_result = ["-"] * len(self.secret_word)
+        for index, (guess_char, target_char) in enumerate(zip(self.current_guess, self.secret_word)):
+            if guess_char == target_char:
+                guess_result[index] = guess_char + "green"
+        
+        for index, (guess_char, target_char) in enumerate(zip(self.current_guess, self.secret_word)):
+            if guess_char in self.secret_word and guess_result[index] == "-":
+                guess_result[index] = guess_char + "yellow"
+
+        for index, letter in enumerate(guess_result):
+            if letter == "-":
+                guess_result[index] = self.current_guess[index]
+
+        self.secret_word = save_secret_word
         return guess_result
+
+        # guess_result = []
+        # for char in range(5):
+        #     if self.current_guess[char] == self.secret_word[char]:
+        #         guess_result.append(self.current_guess[char] + 'green')
+        #     elif self.current_guess[char] in self.secret_word:
+        #         guess_result.append(self.current_guess[char] + 'yellow')
+        #     else:
+        #         guess_result.append(self.current_guess[char])
+    
+        # return guess_result
 
 class WordLengthError(Exception):
     pass
