@@ -1,5 +1,5 @@
 import random
-
+from colorama import Fore
 # All logic of game. Sends computed logic to wordle.game.
 
 
@@ -10,6 +10,7 @@ class WordleLogic:
         self.secret_word_list = []
         self.current_guess = ''
         self.guess_history = []
+        self.colored_results = []
         self.total_guesses = 6
         self.word_length = 5
         self.pick_secret_word()
@@ -48,10 +49,12 @@ class WordleLogic:
         for index, (guess_char, target_char) in enumerate(zip(self.current_guess, self.secret_word)):
             if guess_char == target_char:
                 guess_result[index] = guess_char + "green"
+                self.secret_word = self.secret_word.replace(guess_char, "-")
         
         for index, (guess_char, target_char) in enumerate(zip(self.current_guess, self.secret_word)):
             if guess_char in self.secret_word and guess_result[index] == "-":
                 guess_result[index] = guess_char + "yellow"
+                self.secret_word = self.secret_word.replace(guess_char, "-")
 
         for index, letter in enumerate(guess_result):
             if letter == "-":
@@ -59,6 +62,22 @@ class WordleLogic:
 
         self.secret_word = save_secret_word
         return guess_result
+
+    def display_colored_guess(self, guess):
+        colored_guess = []
+        for letter in guess:
+            if 'green' in letter:
+                color = Fore.GREEN
+            elif 'yellow' in letter:
+                color = Fore.YELLOW
+            else:
+                color = Fore.WHITE
+            colored_guess.append(color + "  " + letter[0] + Fore.RESET)
+
+        colored_guess_str = "".join(colored_guess)
+        self.colored_results.append(colored_guess_str)
+        for i in self.colored_results:
+            print(i)
 
         # guess_result = []
         # for char in range(5):
