@@ -1,32 +1,43 @@
 import random
 
 # All logic of game. Sends computed logic to wordle.game.
+
+
 class WordleLogic:
 
     def __init__(self):
-        with open('word_list_5.txt') as f:
-            self.secret_word = random.choice(f.readlines())
+        self.secret_word = ''
+        self.secret_word_list = []
         self.current_guess = ''
         self.guess_history = []
         self.total_guesses = 6
         self.word_length = 5
+        self.pick_secret_word()
 
     @property
     def play_wordle(self):
-        return not self.user_wins and not self.game_over
+        return not self.user_wins and not self.user_loses
 
     @property
     def user_wins(self):
         return self.current_guess == self.secret_word
 
     @property
-    def game_over(self):
+    def user_loses(self):
         return len(self.guess_history) == self.total_guesses
 
+    def pick_secret_word(self):
+        with open('word_list_5.txt') as f:
+            for word in f.readlines():
+                self.secret_word_list.append(word.strip())
+            self.secret_word = random.choice(self.secret_word_list)
+        
     def validate_user_guess(self, user_guess):
         if len(user_guess) != self.word_length:
-            print(f"Your guess must be {self.word_length} letters long.\n")    
-
+            raise WordLengthError(f"Your guess must be {self.word_length} letters long.\n")
+        if user_guess not in self.secret_word_list:
+            raise NotRealWordError(f"{user_guess} is not a valid word. Guess again.")
+    
     def add_user_guess(self, user_guess):
         self.guess_history.append(user_guess)
         self.current_guess = user_guess
@@ -41,6 +52,15 @@ class WordleLogic:
             else:
                 guess_result.append(self.current_guess[char])
         return guess_result
+
+class WordLengthError(Exception):
+    pass
+
+class NotRealWordError(Exception):
+    pass
+
+
+
 
 # TODO: Randomly choose secret word from word_list
     # def pick_secret_word(self):

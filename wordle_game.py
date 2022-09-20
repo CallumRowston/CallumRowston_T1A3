@@ -1,27 +1,32 @@
-from wordle_logic import WordleLogic
+from wordle_logic import WordleLogic, WordLengthError, NotRealWordError
 from colorama import Fore
 # Interface between user and game. 
 
 # TODO: Welcome user to game, options for quit, rules, stats, game options
 def main():
-    print("Welcome to PyWordle...")
+    print("Welcome to " + Fore.GREEN + "Py" + Fore.YELLOW + "Wordle" + Fore.RESET)
     wordle = WordleLogic()
+    print(wordle.secret_word) # debug
     while wordle.play_wordle:
-        user_guess = input("Enter a 5 letter word.\n").upper()
-        if len(user_guess) != wordle.word_length:
-            print(f"Your guess must be {wordle.word_length} letters long.\n")
-            continue
-        wordle.add_user_guess(user_guess)
-        # wordle.compare_user_guess()
-        display_colored_guess(wordle.compare_user_guess())
-        if wordle.user_wins:
-            print("You win!")
-            break
-        if wordle.game_over:
-            print("You have used all your guesses. Game over!")
-            break
-        print("current guess = " + wordle.current_guess) # debug
-        print("secret word = " + wordle.secret_word) # debug
+        try:
+            user_guess = input("Enter a 5 letter word.\n").upper()
+            wordle.validate_user_guess(user_guess)
+        except WordLengthError as err:
+            print(err)
+        except NotRealWordError as err:
+            print(err)
+        else:
+            wordle.add_user_guess(user_guess)
+            display_colored_guess(wordle.compare_user_guess())
+            if wordle.user_wins:
+                print("You win!")
+                break
+            if wordle.user_loses:
+                print("You have used all your guesses. Game over!")
+                print(f"The correct word was {wordle.secret_word}")
+                break
+        # print("current guess = " + wordle.current_guess) # debug
+        # print("secret word = " + wordle.secret_word) # debug
         
 # TODO: Dispaly user guess as colored result
 def display_colored_guess(guess):
