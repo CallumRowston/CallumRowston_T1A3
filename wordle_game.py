@@ -12,12 +12,10 @@ def main_menu():
     print(f"You have selected {options[menu_entry_index]}!")
     if options[menu_entry_index] == "Play PyWordle":
         play_pywordle()
-        #function to play wordle
     elif options[menu_entry_index] == "Game Settings":
-        pass
-        #function to open game settings
+        game_settings()
     elif options[menu_entry_index] == "Stats":
-        pass
+        display_stats()
     elif options[menu_entry_index] == "Quit":
         print("Quitting application...")
 
@@ -36,6 +34,9 @@ def play_pywordle():
         else:
             wordle.add_user_guess(user_guess)
             display_colored_guess(wordle.compare_user_guess())
+            for _ in range(wordle.total_guesses - len(wordle.guess_history)):
+                print("  _  _  _  _  _")
+
             if wordle.user_wins:
                 print("You win!")
                 break
@@ -49,11 +50,12 @@ def play_pywordle():
 def game_settings():
     pass
 
-def stats():
+def display_stats():
     pass
 
+colored_results = []
 def display_colored_guess(guess):
-    colored_guess = []
+    colored_guess = []   
     for letter in guess:
         if 'green' in letter:
             color = Fore.GREEN
@@ -62,16 +64,17 @@ def display_colored_guess(guess):
         else:
             color = Fore.WHITE
         colored_guess.append(color + "  " + letter[0] + Fore.RESET)
-    print("".join(colored_guess))
 
+    colored_guess_str = "".join(colored_guess)
+    colored_results.append(colored_guess_str)
+    for i in colored_results:
+        print(i)
+    
 
 # TODO: Display end game win/loss. Play again? Quit? 
 def end_menu():
     pass
 
-# TODO: Display stats
-def display_stats():
-    pass
 
 # TODO: Format game interface to look user friendly
 # Spacing
