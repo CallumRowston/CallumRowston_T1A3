@@ -11,7 +11,7 @@ def main_menu():
     menu_entry_index = main_menu.show()
     print(f"You have selected {options[menu_entry_index]}!")
     if options[menu_entry_index] == "Play PyWordle":
-        play_wordle()
+        play_pywordle()
         #function to play wordle
     elif options[menu_entry_index] == "Game Settings":
         pass
@@ -21,37 +21,8 @@ def main_menu():
     elif options[menu_entry_index] == "Quit":
         print("Quitting application...")
 
-
-
-
-
-
-
-        # wordle = WordleLogic()
-        # print(wordle.secret_word) # debug
-        # while wordle.play_wordle:
-        #     try:
-        #         user_guess = input("Enter a 5 letter word.\n").upper()
-        #         wordle.validate_user_guess(user_guess)
-        #     except WordLengthError as err:
-        #         print(err)
-        #     except NotRealWordError as err:
-        #         print(err)
-        #     else:
-        #         wordle.add_user_guess(user_guess)
-        #         display_colored_guess(wordle.compare_user_guess())
-        #         if wordle.user_wins:
-        #             print("You win!")
-        #             break
-        #         if wordle.user_loses:
-        #             print("You have used all your guesses. Game over!")
-        #             print(f"The correct word was {wordle.secret_word}")
-        #             break
-        #     # print("current guess = " + wordle.current_guess) # debug
-        #     # print("secret word = " + wordle.secret_word) # debug
-            
 # TODO: Dispaly user guess as colored result
-def play_wordle():
+def play_pywordle():
     wordle = WordleLogic()
     print(wordle.secret_word) # debug
     while wordle.play_wordle:
@@ -75,7 +46,11 @@ def play_wordle():
         # print("current guess = " + wordle.current_guess) # debug
         # print("secret word = " + wordle.secret_word) # debug
 
+def game_settings():
+    pass
 
+def stats():
+    pass
 
 def display_colored_guess(guess):
     colored_guess = []
