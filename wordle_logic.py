@@ -1,5 +1,7 @@
 import random
+import statistics
 from colorama import Fore
+import json
 # All logic of game. Sends computed logic to wordle.game.
 
 
@@ -12,6 +14,7 @@ class WordleLogic:
         self.guess_history = []
         self.colored_results = []
         self.total_guesses = 6
+        self.count = 0
         self.word_length = 5
         self.pick_secret_word()
 
@@ -41,6 +44,7 @@ class WordleLogic:
     
     def add_user_guess(self, user_guess):
         self.guess_history.append(user_guess)
+        self.count += 1
         self.current_guess = user_guess
 
     def compare_user_guess(self):
@@ -79,16 +83,22 @@ class WordleLogic:
         for i in self.colored_results:
             print(i)
 
-        # guess_result = []
-        # for char in range(5):
-        #     if self.current_guess[char] == self.secret_word[char]:
-        #         guess_result.append(self.current_guess[char] + 'green')
-        #     elif self.current_guess[char] in self.secret_word:
-        #         guess_result.append(self.current_guess[char] + 'yellow')
-        #     else:
-        #         guess_result.append(self.current_guess[char])
-    
-        # return guess_result
+    def add_game_stats(self):
+        with open('stats.json', 'r') as stats:
+            data = json.load(stats)
+            print(data)
+
+            data['Guess Distribution'][str(self.count)] += 1
+            data["Overall Stats"]["Games Played"] += 1
+            if self.user_wins:
+                data["Overall Stats"]["Games Won"] += 1
+            data["Overall Stats"]["Win %"] = round(data["Overall Stats"]["Games Won"] / data["Overall Stats"]["Games Played"] * 100)
+            print(data)
+             
+        with open('stats.json', 'w') as stats:
+            json.dump(data, stats, indent=4)
+
+
 
 class WordLengthError(Exception):
     pass

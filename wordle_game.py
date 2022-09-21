@@ -6,7 +6,7 @@ import os
 
 # TODO: Welcome user to game, options for quit, rules, stats, game options
 def main_menu():
-    print("Welcome to " + Fore.GREEN + "Py" + Fore.YELLOW + "Wordle" + Fore.RESET)
+    print("Welcome to " + Fore.GREEN + "PY" + Fore.YELLOW + "WORDLE" + Fore.RESET + "\nUse up and down arrow keys to navigate menu. \nPress ENTER to select.")
     options = ["Play PyWordle", "Game Settings", "Stats", "Quit"]
     main_menu = TerminalMenu(options)
     menu_entry_index = main_menu.show()
@@ -21,8 +21,10 @@ def main_menu():
 
 # TODO: Dispaly user guess as colored result
 def play_pywordle():
+    os.system('cls' if os.name == 'nt' else 'clear')
     wordle = WordleLogic()
-    # print(wordle.secret_word) # debug
+    
+    print(wordle.secret_word) # debug
     while wordle.play_wordle:
         try:
             user_guess = input("Enter a 5 letter word: ").upper()
@@ -39,11 +41,12 @@ def play_pywordle():
                 print("  _  _  _  _  _")
             if wordle.user_wins:
                 print("You win!")
+                wordle.add_game_stats()
                 end_menu()
-
             if wordle.user_loses:
                 print("You have used all your guesses. Game over!")
                 print(f"The correct word was {wordle.secret_word}")
+                wordle.add_game_stats()
                 end_menu()
 
         # print("current guess = " + wordle.current_guess) # debug
@@ -53,25 +56,7 @@ def game_settings():
     pass
 
 def display_stats():
-    pass
-
-# colored_results = []
-# def display_colored_guess(guess):
-#     colored_guess = []
-#     for letter in guess:
-#         if 'green' in letter:
-#             color = Fore.GREEN
-#         elif 'yellow' in letter:
-#             color = Fore.YELLOW
-#         else:
-#             color = Fore.WHITE
-#         colored_guess.append(color + "  " + letter[0] + Fore.RESET)
-
-#     colored_guess_str = "".join(colored_guess)
-#     colored_results.append(colored_guess_str)
-#     for i in colored_results:
-#         print(i)
-    
+    # with open("stats.json" "r") as stats:
 
 # TODO: Display end game win/loss. Play again? Quit?
 def end_menu():
