@@ -3,18 +3,15 @@ import statistics
 from colorama import Fore
 import json
 # All logic of game. Sends computed logic to wordle.game.
-
-
 class WordleLogic:
 
     def __init__(self):
         self.secret_word = ''
         self.secret_word_list = []
         self.current_guess = ''
-        self.guess_history = []
         self.colored_results = []
         self.total_guesses = 6
-        self.count = 0
+        self.guess_count = 0
         self.word_length = 5
         self.pick_secret_word()
 
@@ -28,7 +25,7 @@ class WordleLogic:
 
     @property
     def user_loses(self):
-        return len(self.guess_history) == self.total_guesses
+        return self.guess_count == self.total_guesses
 
     def pick_secret_word(self):
         with open('word_list_5.txt') as f:
@@ -36,20 +33,23 @@ class WordleLogic:
                 self.secret_word_list.append(word.strip())
             self.secret_word = random.choice(self.secret_word_list)
         
-    def validate_user_guess(self, user_guess):
+    def validate_user_guess(self):
+        user_guess = input("Enter a 5 letter word: ").upper()
         if len(user_guess) != self.word_length:
-            raise WordLengthError(f"Your guess must be {self.word_length} letters long.\n")
+            raise WordLengthError(f"Your guess must be {self.word_length} letters long. Guess again.")
         if user_guess not in self.secret_word_list:
             raise NotRealWordError(f"{user_guess} is not a valid word. Guess again.")
-    
-    def add_user_guess(self, user_guess):
-        self.guess_history.append(user_guess)
-        self.count += 1
         self.current_guess = user_guess
+        self.guess_count += 1
+
+    # def add_user_guess(self):
+    #     self.guess_history.append(user_guess)
+    #     self.guess_count += 1
+    #     self.current_guess = user_guess
 
     def compare_user_guess(self):
         save_secret_word = self.secret_word
-        guess_result = ["-"] * len(self.secret_word)
+        guess_result = ["-"] * self.word_length
         for index, (guess_char, target_char) in enumerate(zip(self.current_guess, self.secret_word)):
             if guess_char == target_char:
                 guess_result[index] = guess_char + "green"
@@ -88,7 +88,7 @@ class WordleLogic:
             data = json.load(stats)
             print(data)
 
-            data['Guess Distribution'][str(self.count)] += 1
+            data['Guess Distribution'][str(self.guess_count)] += 1
             data["Overall Stats"]["Games Played"] += 1
             if self.user_wins:
                 data["Overall Stats"]["Games Won"] += 1
