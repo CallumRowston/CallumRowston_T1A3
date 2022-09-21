@@ -6,15 +6,14 @@ class WordleLogic:
     """
     Contains all logical functionality behind the main gameplay loop and passes relevant data to wordle_game.py to be displayed when required
     """
-    def __init__(self):
-        self.secret_word = ''
+    def __init__(self, total_guesses=6, word_length=5):
         self.secret_word_list = []
+        self.secret_word = ''
         self.current_guess = ''
-        self.colored_results = []
-        self.total_guesses = 6
+        self.total_guesses = total_guesses
         self.guess_count = 0
-        self.word_length = 5
-        self.pick_secret_word()
+        self.word_length = word_length
+        self.set_secret_word()
 
     @property
     def play_wordle(self):
@@ -28,7 +27,7 @@ class WordleLogic:
     def user_loses(self):
         return self.guess_count == self.total_guesses
 
-    def pick_secret_word(self):
+    def set_secret_word(self):
         """
         Uses word list in text file to randomly select a secret word to be guessed
         """
@@ -37,14 +36,14 @@ class WordleLogic:
                 self.secret_word_list.append(word.strip())
             self.secret_word = random.choice(self.secret_word_list)
         
-    def validate_user_guess(self):
+    def validate_user_guess(self, user_guess):
         """
         Checks user guess is valid input before setting as instance variable
         Raises:
             WordLengthError: Checks user guess is 5 characters long
             NotRealWordError: Checks user guess is in the word list
         """
-        user_guess = input("Enter a 5 letter word: ").upper()
+        
         if len(user_guess) != self.word_length:
             raise WordLengthError(f"Your guess must be {self.word_length} letters long. Guess again.")
         if user_guess not in self.secret_word_list:
@@ -52,6 +51,7 @@ class WordleLogic:
         else:
             self.current_guess = user_guess
             self.guess_count += 1
+        return self.current_guess
 
     def compare_user_guess(self):
         """_summary_
@@ -76,14 +76,16 @@ class WordleLogic:
                 guess_result[index] = self.current_guess[index]
 
         self.secret_word = save_secret_word
+        print(guess_result)
         return guess_result
 
-    def display_colored_guess(self, guess_result):
+    def display_colored_guess(self, guess_list):
         """
         Turns list from compare_user_guess into a list of colored letters depending on their state and prints them.
         """
         colored_guess = []
-        for letter in guess_result:
+        colored_results = []
+        for letter in guess_list:
             if 'green' in letter:
                 color = Fore.GREEN
             elif 'yellow' in letter:
@@ -93,8 +95,8 @@ class WordleLogic:
             colored_guess.append(color + "  " + letter[0] + Fore.RESET)
 
         colored_guess_str = "".join(colored_guess)
-        self.colored_results.append(colored_guess_str)
-        for i in self.colored_results:
+        colored_results.append(colored_guess_str)
+        for i in colored_results:
             print(i)
 
     def add_game_stats(self):

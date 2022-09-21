@@ -11,10 +11,10 @@ def main_menu():
     Main menu to navigate to the main game, rules, stats or quit.
     """
     os.system('cls' if os.name == 'nt' else 'clear')
-    print("Welcome to " + Fore.GREEN + "PY" + Fore.YELLOW + "WORDLE" + Fore.RESET + "\nUse up and down arrow keys to navigate menu.\nPress ENTER to select an option.\n")
+    print(f"Welcome to {Fore.GREEN}PY{Fore.YELLOW}WORDLE{Fore.RESET}\nUse up and down arrow keys to navigate menu.\nPress ENTER to select an option.\n")
     options = ["Play PyWordle", "Rules", "Stats", "Quit"]
-    main_menu = TerminalMenu(options)
-    menu_entry_index = main_menu.show()
+    main_menu_display = TerminalMenu(options)
+    menu_entry_index = main_menu_display.show()
     if options[menu_entry_index] == "Play PyWordle":
         play_pywordle()
     elif options[menu_entry_index] == "Rules":
@@ -22,7 +22,8 @@ def main_menu():
     elif options[menu_entry_index] == "Stats":
         display_stats()
     elif options[menu_entry_index] == "Quit":
-        print("Quitting application...")
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print(f"Quitting {Fore.GREEN}PY{Fore.YELLOW}WORDLE{Fore.RESET}...\nSee you next time!")
 
 def play_pywordle():
     """
@@ -33,18 +34,17 @@ def play_pywordle():
     print(wordle.secret_word) # debug
     while wordle.play_wordle:
         try:
-            # user_guess = input("Enter a 5 letter word: ").upper()
-            wordle.validate_user_guess()
+            user_guess = input("Enter a 5 letter word: ").upper()
+            wordle.validate_user_guess(user_guess)
         except (WordLengthError, NotRealWordError) as err:
             print(err)
         else:
             os.system('cls' if os.name == 'nt' else 'clear')
-            # wordle.add_user_guess(user_guess)
             wordle.display_colored_guess(wordle.compare_user_guess())
             for _ in range(wordle.total_guesses - wordle.guess_count):
                 print("  _  _  _  _  _")
             if wordle.user_wins:
-                print("You win!")
+                print(f"You won in {wordle.guess_count} guesses!")
                 wordle.add_game_stats()
                 end_menu()
             if wordle.user_loses:
@@ -58,14 +58,14 @@ def rules():
     Prints the rules for the game.
     """
     os.system('cls' if os.name == 'nt' else 'clear')
-    print("~~ Rules ~~\n")
-    print("Guess the word in 6 tries.")
-    print("Each guess must be a valid 5-letter word.")
-    print("Hit ENTER to submit your guess.")
-    print("After each guess, the color of the letters will change\nto show how close your guess was to the word.\n")
-    print(f"{Fore.GREEN}GREEN{Fore.RESET} letters are in the correct spot.")
-    print(f"{Fore.YELLOW}YELLOW{Fore.RESET} letters are in the word but in the wrong spot.")
-    print("WHITE letters are not in the word anywhere.\n")
+    print("~~ Rules ~~\n\n"\
+        "Guess the word in 6 tries.\n"\
+        "Each guess must be a valid 5-letter word.\n"\
+        "Hit ENTER to submit your guess.\n"\
+        "After each guess, the color of the letters will change\nto show how close your guess was to the word.\n\n"\
+        f"{Fore.GREEN}GREEN{Fore.RESET} letters are in the correct spot.\n"\
+        f"{Fore.YELLOW}YELLOW{Fore.RESET} letters are in the word but in the wrong spot.\n"\
+        "WHITE letters are not in the word anywhere.\n")
     
     rules_options = ["Back to Main Menu"]
     rules_menu_display = TerminalMenu(rules_options)
@@ -98,7 +98,7 @@ def display_stats():
         if stats_options[menu_entry_index] == "Back to Main Menu":
             main_menu()
         elif stats_options[menu_entry_index] == "Exit to Desktop":
-            print("Quitting application...")
+            print(f"Quitting {Fore.GREEN}PY{Fore.YELLOW}WORDLE{Fore.RESET}...\nSee you next time!")
 
 def end_menu():
     """
@@ -113,7 +113,7 @@ def end_menu():
     elif end_options[menu_entry_index] == "Exit to Main Menu":
         main_menu()
     elif end_options[menu_entry_index] == "Exit to Desktop":
-        print("Quitting application...")
+        print(f"Quitting {Fore.GREEN}PY{Fore.YELLOW}WORDLE{Fore.RESET}...\nSee you next time!")
 
 if __name__ == '__main__':
     main_menu()

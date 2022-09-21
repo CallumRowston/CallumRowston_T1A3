@@ -1,12 +1,21 @@
 from wordle_logic import WordleLogic, WordLengthError, NotRealWordError
+import pytest
 
-def fake_input():
-    return "CRATE"
+wordle_test = WordleLogic()
 
-class TestValidateUserGuess:
-    def test_valid(self, monkeypatch):
-        wordle_instance = WordleLogic()
-        monkeypatch.setattr('builtins.input', fake_input)
-        assert wordle_instance.validate_user_guess(fake_input) == None
-        # assert wordle_instance.validate_user_guess("eee") == WordLengthError(f"Your guess must be {self.word_length} letters long.\n")
-        # assert wordle_instance.validate_user_guess("eeeee") == NotRealWordError(f"{user_guess} is not a valid word. Guess again.")
+def test_validate_user_guess_raises_word_length_exception():
+    with pytest.raises(WordLengthError):
+        wordle_test.validate_user_guess("red")
+    with pytest.raises(WordLengthError):
+        wordle_test.validate_user_guess("antidisestablishmentarianism")
+    with pytest.raises(WordLengthError):
+        wordle_test.validate_user_guess("speedy")
+
+def test_validate_user_guess_raises_not_real_word_exception():
+    with pytest.raises(NotRealWordError):
+        wordle_test.validate_user_guess("eeeee")
+    with pytest.raises(NotRealWordError):
+        wordle_test.validate_user_guess("e$-/G")
+    with pytest.raises(NotRealWordError):
+        wordle_test.validate_user_guess("25000")
+
