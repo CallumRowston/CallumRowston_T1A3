@@ -4,8 +4,12 @@ from simple_term_menu import TerminalMenu
 import os
 import json
 
-# TODO: Welcome user to game, options for quit, rules, stats, game options
+# Main game loop and Menus
+
 def main_menu():
+    """
+    Main menu to navigate to the main game, rules, stats or quit.
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
     print("Welcome to " + Fore.GREEN + "PY" + Fore.YELLOW + "WORDLE" + Fore.RESET + "\nUse up and down arrow keys to navigate menu.\nPress ENTER to select an option.\n")
     options = ["Play PyWordle", "Rules", "Stats", "Quit"]
@@ -21,6 +25,9 @@ def main_menu():
         print("Quitting application...")
 
 def play_pywordle():
+    """
+    Main gameplay loop. Calls methods from WordleLogic class.
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
     wordle = WordleLogic()  
     print(wordle.secret_word) # debug
@@ -47,6 +54,9 @@ def play_pywordle():
                 end_menu()
 
 def rules():
+    """
+    Prints the rules for the game.
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
     print("~~ Rules ~~\n")
     print("Guess the word in 6 tries.")
@@ -65,6 +75,9 @@ def rules():
         main_menu()
 
 def display_stats():
+    """
+    Displays statistics from JSON file.
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
     with open("stats.json", "r") as stats:
         data = json.load(stats)
@@ -88,6 +101,9 @@ def display_stats():
             print("Quitting application...")
 
 def end_menu():
+    """
+    Displays menu upon game end.
+    """
     end_options = ["Play Again", "Exit to Main Menu", "Exit to Desktop"]
     end_menu_display = TerminalMenu(end_options)
     menu_entry_index = end_menu_display.show()
@@ -98,7 +114,6 @@ def end_menu():
         main_menu()
     elif end_options[menu_entry_index] == "Exit to Desktop":
         print("Quitting application...")
-
 
 if __name__ == '__main__':
     main_menu()
