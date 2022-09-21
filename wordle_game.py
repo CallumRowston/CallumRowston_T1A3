@@ -2,6 +2,8 @@ from wordle_logic import WordleLogic, WordLengthError, NotRealWordError
 from colorama import Fore
 from simple_term_menu import TerminalMenu
 import os
+import json
+
 # Interface between user and game.
 
 # TODO: Welcome user to game, options for quit, rules, stats, game options
@@ -56,7 +58,27 @@ def game_settings():
     pass
 
 def display_stats():
-    # with open("stats.json" "r") as stats:
+    os.system('cls' if os.name == 'nt' else 'clear')
+    with open("stats.json", "r") as stats:
+        data = json.load(stats)
+        overall_stats = data["Overall Stats"]
+        guess_distribution = data["Guess Distribution"]
+        print("Your Stats\n")
+        for key, value in overall_stats.items():
+            print("{:<15} {:<15}".format(key, value) + "\n")
+        print("{:<8} {:<8}".format('Guesses', 'Distribution'))
+        for key, value in guess_distribution.items():
+            print("{:<8} {:<8}".format(key, value))
+        print("")
+        
+        stats_options = ["Back to Main Menu", "Exit to Desktop"]
+        stats_menu_display = TerminalMenu(stats_options)
+        menu_entry_index = stats_menu_display.show()
+        os.system('cls' if os.name == 'nt' else 'clear')
+        if stats_options[menu_entry_index] == "Back to Main Menu":
+            main_menu()
+        elif stats_options[menu_entry_index] == "Exit to Desktop":
+            print("Quitting application...")
 
 # TODO: Display end game win/loss. Play again? Quit?
 def end_menu():
