@@ -4,15 +4,17 @@ import json
 
 class WordleLogic:
     """Contains all logic functionality behind the main gameplay loop and passes relevant data to wordle_game.py to be displayed when required"""
-    word_length = 5
-    total_guesses = 6
+    # word_length = 5
+    # total_guesses = 6
 
-    def __init__(self):
+    def __init__(self, word_length=5, total_guesses=6):
         self.secret_word_list = []
-        self.secret_word = "PAPER"
+        self.secret_word = ""
         self.current_guess = ""
         self.guess_results = []
         self.guess_count = 0
+        self.word_length = word_length
+        self.total_guesses = total_guesses
         self.set_secret_word()
 
     @property
@@ -32,7 +34,7 @@ class WordleLogic:
         with open('word_list_5.txt') as f:
             for word in f.readlines():
                 self.secret_word_list.append(word.strip())
-            # self.secret_word = random.choice(self.secret_word_list)
+            self.secret_word = random.choice(self.secret_word_list)
        
     def validate_user_guess(self, user_guess):
         """Checks user guess is valid input before setting as instance variable
@@ -70,7 +72,6 @@ class WordleLogic:
                 guess_result[index] = self.current_guess[index]
 
         self.secret_word = save_secret_word
-        print(guess_result)
         return guess_result
 
     def display_colored_guess(self, guess_result):
@@ -90,7 +91,7 @@ class WordleLogic:
         colored_guess_str = "".join(colored_guess)
         self.guess_results.append(colored_guess_str)
         print(*(guess for guess in self.guess_results), sep='\n')
-        print(*("  _  _  _  _  _" for _ in range(self.total_guesses - self.guess_count)), sep='\n')
+        print(*("  _" * self.word_length for _ in range(self.total_guesses - self.guess_count)), sep='\n')
 
     def add_game_stats(self):
         """Adds results of the game to the JSON file statistics"""

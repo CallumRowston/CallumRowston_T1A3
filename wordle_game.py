@@ -1,22 +1,29 @@
 from wordle_logic import WordleLogic, WordLengthError, NotRealWordError
 from colorama import Fore
 from simple_term_menu import TerminalMenu
+import wordle_settings
 import os
 import json
 
-# Main game loop and Menus
+WORD_LENGTH_SETTING = 5
+TOTAL_GUESSES_SETTING = 6
 
+# Main game loop and Menus
 def main_menu():
     """Main menu to navigate to the main game, rules, stats or quit."""
     os.system('cls' if os.name == 'nt' else 'clear')
     print(f"Welcome to {Fore.GREEN}PY{Fore.YELLOW}WORDLE{Fore.RESET}\nUse up and down arrow keys to navigate menu.\nPress ENTER to select an option.\n")
-    options = ["Play PyWordle", "Rules", "Stats", "Quit"]
+    print(WORD_LENGTH_SETTING) #debug
+    print(TOTAL_GUESSES_SETTING) #debug
+    options = ["Play PyWordle", "Rules", "Game Settings", "Stats", "Quit"]
     main_menu_display = TerminalMenu(options)
     menu_entry_index = main_menu_display.show()
     if options[menu_entry_index] == "Play PyWordle":
         play_pywordle()
     elif options[menu_entry_index] == "Rules":
         rules()
+    elif options[menu_entry_index] == "Game Settings":
+        wordle_settings.game_settings_menu()
     elif options[menu_entry_index] == "Stats":
         display_stats()
     elif options[menu_entry_index] == "Quit":
@@ -26,8 +33,10 @@ def main_menu():
 def play_pywordle():
     """Main gameplay loop. Calls methods from instance of WordleLogic class."""
     os.system('cls' if os.name == 'nt' else 'clear')
-    wordle = WordleLogic()
+    wordle = WordleLogic(WORD_LENGTH_SETTING, TOTAL_GUESSES_SETTING)
     print(wordle.secret_word) # debug
+    print(wordle.word_length)
+    print(wordle.total_guesses)
     while wordle.play_wordle:
         try:
             user_guess = input("Enter a 5 letter word: ").upper()
@@ -72,18 +81,6 @@ def rules():
     if rules_options[menu_entry_index] == "Back to Main Menu":
         main_menu()
 
-def game_settings():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    game_options = ["Set word length", "Set guess limit", "Back to Main Menu"]
-    game_menu_display = TerminalMenu(game_options)
-    menu_entry_index = game_menu_display.show()
-    os.system('cls' if os.name == 'nt' else 'clear')
-    if game_options[menu_entry_index] == "Set word length":
-        main_menu()
-    elif game_options[menu_entry_index] == "Set guess limit":
-        main_menu()
-    elif game_options[menu_entry_index] == "Back to Main Menu":
-        main_menu()
 
 def display_stats():
     """Displays statistics from JSON file."""
