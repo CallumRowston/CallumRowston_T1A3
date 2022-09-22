@@ -8,6 +8,7 @@ def game_settings_menu():
     os.system('cls' if os.name == 'nt' else 'clear')
     print(
         "~~ Current Settings ~~\n\n"
+        "**WARNING! Statistics are only tracked for games played with default settings**\n\n"
         f"Word Length: {wordle_game.WORD_LENGTH_SETTING}\n"
         f"Attempts: {wordle_game.TOTAL_GUESSES_SETTING}\n"
         )

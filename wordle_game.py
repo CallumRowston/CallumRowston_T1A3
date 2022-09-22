@@ -39,7 +39,7 @@ def play_pywordle():
     print(wordle.total_guesses)
     while wordle.play_wordle:
         try:
-            user_guess = input("Enter a 5 letter word: ").upper()
+            user_guess = input(f"Enter a {WORD_LENGTH_SETTING} letter word: ").upper()
             wordle.validate_user_guess(user_guess)
         except (WordLengthError, NotRealWordError) as err:
             print(err)
@@ -96,6 +96,8 @@ def display_stats():
         for key, value in guess_distribution.items():
             print("{:<8} {:<8}".format(key, value))
         print("")
+
+    print("**Statistics are only tracked for games played with default settings**\n")
 
     stats_options = ["Back to Main Menu", "Exit to Desktop"]
     stats_menu_display = TerminalMenu(stats_options)

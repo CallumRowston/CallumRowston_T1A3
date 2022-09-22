@@ -31,7 +31,8 @@ class WordleLogic:
 
     def set_secret_word(self):
         """Uses word list in text file to randomly select a secret word to be guessed"""
-        with open('word_list_5.txt') as f:
+        file = f"word_list_{self.word_length}.txt"
+        with open(file) as f:
             for word in f.readlines():
                 self.secret_word_list.append(word.strip())
             self.secret_word = random.choice(self.secret_word_list)
@@ -95,16 +96,17 @@ class WordleLogic:
 
     def add_game_stats(self):
         """Adds results of the game to the JSON file statistics"""
-        with open('stats.json', 'r') as stats:
-            data = json.load(stats)
-            data['Guess Distribution'][str(self.guess_count)] += 1
-            data["Overall Stats"]["Games Played"] += 1
-            if self.user_wins:
-                data["Overall Stats"]["Games Won"] += 1
-            data["Overall Stats"]["Win %"] = round(data["Overall Stats"]["Games Won"] / data["Overall Stats"]["Games Played"] * 100)
+        if self.word_length == 5 and self.total_guesses == 6:
+            with open('stats.json', 'r') as stats:
+                data = json.load(stats)
+                data['Guess Distribution'][str(self.guess_count)] += 1
+                data["Overall Stats"]["Games Played"] += 1
+                if self.user_wins:
+                    data["Overall Stats"]["Games Won"] += 1
+                data["Overall Stats"]["Win %"] = round(data["Overall Stats"]["Games Won"] / data["Overall Stats"]["Games Played"] * 100)
 
-        with open('stats.json', 'w') as stats:
-            json.dump(data, stats, indent=4)
+            with open('stats.json', 'w') as stats:
+                json.dump(data, stats, indent=4)
 
 class WordLengthError(Exception):
     pass
