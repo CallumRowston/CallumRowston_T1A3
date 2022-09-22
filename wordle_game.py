@@ -40,11 +40,12 @@ def play_pywordle():
             print(err)
         else:
             os.system('cls' if os.name == 'nt' else 'clear')
-            wordle.display_colored_guess(wordle.compare_user_guess())
-            for _ in range(wordle.total_guesses - wordle.guess_count):
-                print("  _  _  _  _  _")
+            wordle.display_colored_guess(wordle.compare_user_guess(user_guess))
             if wordle.user_wins:
-                print(f"You won in {wordle.guess_count} guesses!")
+                if wordle.guess_count == 1:
+                    print(f"WOW! You guessed it in 1 attempt!")
+                else:
+                    print(f"You won in {wordle.guess_count} guesses!")
                 wordle.add_game_stats()
                 end_menu()
             if wordle.user_loses:
@@ -58,15 +59,24 @@ def rules():
     Prints the rules for the game.
     """
     os.system('cls' if os.name == 'nt' else 'clear')
-    print("~~ Rules ~~\n\n"\
-        "Guess the word in 6 tries.\n"\
-        "Each guess must be a valid 5-letter word.\n"\
-        "Hit ENTER to submit your guess.\n"\
-        "After each guess, the color of the letters will change\nto show how close your guess was to the word.\n\n"\
-        f"{Fore.GREEN}GREEN{Fore.RESET} letters are in the correct spot.\n"\
-        f"{Fore.YELLOW}YELLOW{Fore.RESET} letters are in the word but in the wrong spot.\n"\
-        "WHITE letters are not in the word anywhere.\n")
-    
+    # print("~~ Rules ~~\n\n"\
+    #     "Guess the word in 6 tries.\n"\
+    #     "Each guess must be a valid 5-letter word.\n"\
+    #     "Hit ENTER to submit your guess.\n"\
+    #     "After each guess, the color of the letters will change\nto show how close your guess was to the word.\n\n"\
+    #     f"{Fore.GREEN}GREEN{Fore.RESET} letters are in the correct spot.\n"\
+    #     f"{Fore.YELLOW}YELLOW{Fore.RESET} letters are in the word but in the wrong spot.\n"\
+    #     "WHITE letters are not in the word anywhere.\n")
+
+    print(f"""~~ Rules ~~\n
+Guess the word in 6 tries.\n
+Each guess must be a valid 5-letter word.\n
+Hit ENTER to submit your guess.\n
+After each guess, the color of the letters will change\nto show how close your guess was to the word.\n
+{Fore.GREEN}GREEN{Fore.RESET} letters are in the correct spot.\n
+{Fore.YELLOW}YELLOW{Fore.RESET} letters are in the word but in the wrong spot.\n
+WHITE letters are not in the word anywhere.\n""")
+
     rules_options = ["Back to Main Menu"]
     rules_menu_display = TerminalMenu(rules_options)
     menu_entry_index = rules_menu_display.show()
