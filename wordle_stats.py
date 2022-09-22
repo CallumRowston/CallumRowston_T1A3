@@ -4,7 +4,7 @@ from simple_term_menu import TerminalMenu
 import json
 
 def display_stats():
-    """Displays statistics from JSON file."""
+    """Displays statistics from JSON file. Provides guess distribution in table format."""
     wordle_game.clear_screen()
     with open("stats.json", "r") as stats:
         data = json.load(stats)

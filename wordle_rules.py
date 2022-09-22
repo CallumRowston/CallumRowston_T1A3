@@ -6,7 +6,7 @@ def display_rules():
     """Displays the rules for the game"""
     clear_screen()
     print(
-        "~~ Rules ~~\n\n"
+        f"~~ {Fore.GREEN}Rules{Fore.RESET} ~~\n\n"
         "Guess the word in 6 tries.\n"
         "Each guess must be a valid 5-letter word.\n"
         "Hit ENTER to submit your guess.\n"

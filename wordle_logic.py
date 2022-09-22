@@ -3,7 +3,7 @@ from colorama import Fore
 import json
 
 class WordleLogic:
-    """Contains all logic functionality behind the main gameplay loop and passes relevant data to wordle_game.py to be displayed when required"""
+    """Contains all logic and functionality behind the main gameplay loop. Passes relevant data to wordle_game.py to be displayed when required"""
     def __init__(self, word_length=5, total_guesses=6):
         self.secret_word_list = []
         self.secret_word = ""
@@ -37,12 +37,12 @@ class WordleLogic:
             for word in f.readlines():
                 self.secret_word_list.append(word.strip())
             self.secret_word = random.choice(self.secret_word_list)
-       
+            
     def validate_user_guess(self, user_guess):
         """Checks user guess is valid input before setting as instance variable
         Raises:
-            WordLengthError: Checks user guess is 5 characters long
-            NotRealWordError: Checks user guess is in the word list
+            WordLengthError: If user guess is not word_length characters long
+            NotRealWordError: If user guess is not in the secret_word_list
         """
         if len(user_guess) != self.word_length:
             raise WordLengthError(f"Your guess must be {self.word_length} letters long. Guess again.")
