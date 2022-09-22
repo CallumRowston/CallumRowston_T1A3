@@ -5,12 +5,11 @@ import wordle_rules
 import wordle_settings
 import wordle_stats
 import os
-# import json
 
 WORD_LENGTH_SETTING = 5
 TOTAL_GUESSES_SETTING = 6
 
-# Main game loop and Main Menu
+# Menus and main game loop
 def main_menu():
     """Main menu to navigate to the main game, rules, settings, stats or quit."""
     clear_screen()
@@ -58,56 +57,6 @@ def play_pywordle():
                 print("You have used all your guesses. Game over!")
                 print(f"The correct word was {wordle.secret_word}\n")
                 end_menu()
-
-# def display_rules():
-#     """Displays the rules for the game"""
-#     clear_screen()
-#     print(
-#         "~~ Rules ~~\n\n"
-#         "Guess the word in 6 tries.\n"
-#         "Each guess must be a valid 5-letter word.\n"
-#         "Hit ENTER to submit your guess.\n"
-#         "After each guess, the color of the letters will change\n"
-#         "to show how close your guess was to the word.\n\n"
-#         f"{Fore.GREEN}GREEN{Fore.RESET} letters are in the correct spot.\n"
-#         f"{Fore.YELLOW}YELLOW{Fore.RESET} letters are in the word but in the wrong spot.\n"
-#         "WHITE letters are not in the word anywhere.\n"
-#         )
-
-#     rules_options = ["Back to Main Menu"]
-#     rules_menu_display = TerminalMenu(rules_options)
-#     menu_entry_index = rules_menu_display.show()
-#     print("Press ENTER to return to the main menu.")
-
-#     if rules_options[menu_entry_index] == "Back to Main Menu":
-#         main_menu()
-
-# def display_stats():
-#     """Displays statistics from JSON file."""
-#     clear_screen()
-#     with open("stats.json", "r") as stats:
-#         data = json.load(stats)
-#         overall_stats = data["Overall Stats"]
-#         guess_distribution = data["Guess Distribution"]
-#         print(f"~~ {Fore.GREEN}Your {Fore.YELLOW}Stats{Fore.RESET} ~~\n")
-#         for key, value in overall_stats.items():
-#             print("{:<24} {:<24}".format(Fore.BLUE + key + Fore.RESET, value) + "\n")
-#         print("{:<8} {:<8}".format(Fore.GREEN + 'Guesses', Fore.YELLOW + 'Distribution' + Fore.RESET))
-#         for key, value in guess_distribution.items():
-#             print("{:<8} {:<8}".format(key, value))
-#         print("")
-
-#     print("**Statistics are only tracked for games played with default settings**\n")
-
-#     stats_options = ["Back to Main Menu", "Exit to Desktop"]
-#     stats_menu_display = TerminalMenu(stats_options)
-#     menu_entry_index = stats_menu_display.show()
-#     clear_screen()
-
-#     if stats_options[menu_entry_index] == "Back to Main Menu":
-#         main_menu()
-#     elif stats_options[menu_entry_index] == "Exit to Desktop":
-#         quit_messager()
 
 def end_menu():
     """Displays menu upon game end."""
