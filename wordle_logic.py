@@ -3,16 +3,14 @@ from colorama import Fore
 import json
 
 class WordleLogic:
-    """
-    Contains all logical functionality behind the main gameplay loop and passes relevant data to wordle_game.py to be displayed when required
-    """
+    """Contains all logic functionality behind the main gameplay loop and passes relevant data to wordle_game.py to be displayed when required"""
     word_length = 5
     total_guesses = 6
 
     def __init__(self):
         self.secret_word_list = []
-        self.secret_word = ''
-        self.current_guess = ''
+        self.secret_word = "PAPER"
+        self.current_guess = ""
         self.guess_results = []
         self.guess_count = 0
         self.set_secret_word()
@@ -30,17 +28,14 @@ class WordleLogic:
         return self.guess_count == self.total_guesses
 
     def set_secret_word(self):
-        """
-        Uses word list in text file to randomly select a secret word to be guessed
-        """
+        """Uses word list in text file to randomly select a secret word to be guessed"""
         with open('word_list_5.txt') as f:
             for word in f.readlines():
                 self.secret_word_list.append(word.strip())
-            self.secret_word = random.choice(self.secret_word_list)
+            # self.secret_word = random.choice(self.secret_word_list)
        
     def validate_user_guess(self, user_guess):
-        """
-        Checks user guess is valid input before setting as instance variable
+        """Checks user guess is valid input before setting as instance variable
         Raises:
             WordLengthError: Checks user guess is 5 characters long
             NotRealWordError: Checks user guess is in the word list
@@ -53,10 +48,8 @@ class WordleLogic:
         self.current_guess = user_guess
         self.guess_count += 1
 
-
     def compare_user_guess(self):
-        """_summary_
-        Checks user guess against the secret word and marks each letter as correct, wrong position or incorrect
+        """Checks user guess against the secret word and marks each letter as correct, wrong position or incorrect
         Returns:
             List: Letters of user guess marked if correct or not
         """
@@ -77,12 +70,12 @@ class WordleLogic:
                 guess_result[index] = self.current_guess[index]
 
         self.secret_word = save_secret_word
+        print(guess_result)
         return guess_result
 
     def display_colored_guess(self, guess_result):
-        """
-        Turns list from compare_user_guess into a list of colored letters depending on their state and prints them.
-        Prints additional underscored lines to represent remaining attempts.
+        """Turns list from compare_user_guess into a list of colored letters depending on their state and prints them.
+            Prints additional underscored lines to represent remaining attempts.
         """
         colored_guess = []
         for letter in guess_result:
@@ -100,9 +93,7 @@ class WordleLogic:
         print(*("  _  _  _  _  _" for _ in range(self.total_guesses - self.guess_count)), sep='\n')
 
     def add_game_stats(self):
-        """
-        Adds results of the game to the JSON file statistics
-        """
+        """Adds results of the game to the JSON file statistics"""
         with open('stats.json', 'r') as stats:
             data = json.load(stats)
             data['Guess Distribution'][str(self.guess_count)] += 1
@@ -110,7 +101,7 @@ class WordleLogic:
             if self.user_wins:
                 data["Overall Stats"]["Games Won"] += 1
             data["Overall Stats"]["Win %"] = round(data["Overall Stats"]["Games Won"] / data["Overall Stats"]["Games Played"] * 100)
-             
+
         with open('stats.json', 'w') as stats:
             json.dump(data, stats, indent=4)
 

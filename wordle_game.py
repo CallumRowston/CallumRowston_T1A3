@@ -7,9 +7,7 @@ import json
 # Main game loop and Menus
 
 def main_menu():
-    """
-    Main menu to navigate to the main game, rules, stats or quit.
-    """
+    """Main menu to navigate to the main game, rules, stats or quit."""
     os.system('cls' if os.name == 'nt' else 'clear')
     print(f"Welcome to {Fore.GREEN}PY{Fore.YELLOW}WORDLE{Fore.RESET}\nUse up and down arrow keys to navigate menu.\nPress ENTER to select an option.\n")
     options = ["Play PyWordle", "Rules", "Stats", "Quit"]
@@ -26,11 +24,9 @@ def main_menu():
         print(f"Quitting {Fore.GREEN}PY{Fore.YELLOW}WORDLE{Fore.RESET}...\nSee you next time!")
 
 def play_pywordle():
-    """
-    Main gameplay loop. Calls methods from WordleLogic class.
-    """
+    """Main gameplay loop. Calls methods from instance of WordleLogic class."""
     os.system('cls' if os.name == 'nt' else 'clear')
-    wordle = WordleLogic()  
+    wordle = WordleLogic()
     print(wordle.secret_word) # debug
     while wordle.play_wordle:
         try:
@@ -40,42 +36,34 @@ def play_pywordle():
             print(err)
         else:
             os.system('cls' if os.name == 'nt' else 'clear')
-            wordle.display_colored_guess(wordle.compare_user_guess(user_guess))
+            wordle.display_colored_guess(wordle.compare_user_guess())
             if wordle.user_wins:
                 if wordle.guess_count == 1:
-                    print(f"WOW! You guessed it in 1 attempt!")
+                    print(f"\nWOW! You guessed it in 1 attempt!\n")
                 else:
-                    print(f"You won in {wordle.guess_count} guesses!")
+                    print(f"\nYou won in {wordle.guess_count} guesses!\n")
                 wordle.add_game_stats()
                 end_menu()
             if wordle.user_loses:
                 print("You have used all your guesses. Game over!")
-                print(f"The correct word was {wordle.secret_word}")
+                print(f"The correct word was {wordle.secret_word}\n")
                 wordle.add_game_stats()
                 end_menu()
 
 def rules():
-    """
-    Prints the rules for the game.
-    """
+    """Prints the rules for the game on a clear terminal"""
     os.system('cls' if os.name == 'nt' else 'clear')
-    # print("~~ Rules ~~\n\n"\
-    #     "Guess the word in 6 tries.\n"\
-    #     "Each guess must be a valid 5-letter word.\n"\
-    #     "Hit ENTER to submit your guess.\n"\
-    #     "After each guess, the color of the letters will change\nto show how close your guess was to the word.\n\n"\
-    #     f"{Fore.GREEN}GREEN{Fore.RESET} letters are in the correct spot.\n"\
-    #     f"{Fore.YELLOW}YELLOW{Fore.RESET} letters are in the word but in the wrong spot.\n"\
-    #     "WHITE letters are not in the word anywhere.\n")
-
-    print(f"""~~ Rules ~~\n
-Guess the word in 6 tries.\n
-Each guess must be a valid 5-letter word.\n
-Hit ENTER to submit your guess.\n
-After each guess, the color of the letters will change\nto show how close your guess was to the word.\n
-{Fore.GREEN}GREEN{Fore.RESET} letters are in the correct spot.\n
-{Fore.YELLOW}YELLOW{Fore.RESET} letters are in the word but in the wrong spot.\n
-WHITE letters are not in the word anywhere.\n""")
+    print(
+        "~~ Rules ~~\n\n"
+        "Guess the word in 6 tries.\n"
+        "Each guess must be a valid 5-letter word.\n"
+        "Hit ENTER to submit your guess.\n"
+        "After each guess, the color of the letters will change\n"
+        "to show how close your guess was to the word.\n\n"
+        f"{Fore.GREEN}GREEN{Fore.RESET} letters are in the correct spot.\n"
+        f"{Fore.YELLOW}YELLOW{Fore.RESET} letters are in the word but in the wrong spot.\n"
+        "WHITE letters are not in the word anywhere.\n"
+        )
 
     rules_options = ["Back to Main Menu"]
     rules_menu_display = TerminalMenu(rules_options)
@@ -84,10 +72,21 @@ WHITE letters are not in the word anywhere.\n""")
     if rules_options[menu_entry_index] == "Back to Main Menu":
         main_menu()
 
+def game_settings():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    game_options = ["Set word length", "Set guess limit", "Back to Main Menu"]
+    game_menu_display = TerminalMenu(game_options)
+    menu_entry_index = game_menu_display.show()
+    os.system('cls' if os.name == 'nt' else 'clear')
+    if game_options[menu_entry_index] == "Set word length":
+        main_menu()
+    elif game_options[menu_entry_index] == "Set guess limit":
+        main_menu()
+    elif game_options[menu_entry_index] == "Back to Main Menu":
+        main_menu()
+
 def display_stats():
-    """
-    Displays statistics from JSON file.
-    """
+    """Displays statistics from JSON file."""
     os.system('cls' if os.name == 'nt' else 'clear')
     with open("stats.json", "r") as stats:
         data = json.load(stats)
@@ -101,19 +100,17 @@ def display_stats():
             print("{:<8} {:<8}".format(key, value))
         print("")
 
-        stats_options = ["Back to Main Menu", "Exit to Desktop"]
-        stats_menu_display = TerminalMenu(stats_options)
-        menu_entry_index = stats_menu_display.show()
-        os.system('cls' if os.name == 'nt' else 'clear')
-        if stats_options[menu_entry_index] == "Back to Main Menu":
-            main_menu()
-        elif stats_options[menu_entry_index] == "Exit to Desktop":
-            print(f"Quitting {Fore.GREEN}PY{Fore.YELLOW}WORDLE{Fore.RESET}...\nSee you next time!")
+    stats_options = ["Back to Main Menu", "Exit to Desktop"]
+    stats_menu_display = TerminalMenu(stats_options)
+    menu_entry_index = stats_menu_display.show()
+    os.system('cls' if os.name == 'nt' else 'clear')
+    if stats_options[menu_entry_index] == "Back to Main Menu":
+        main_menu()
+    elif stats_options[menu_entry_index] == "Exit to Desktop":
+        print(f"Quitting {Fore.GREEN}PY{Fore.YELLOW}WORDLE{Fore.RESET}...\nSee you next time!")
 
 def end_menu():
-    """
-    Displays menu upon game end.
-    """
+    """Displays menu upon game end."""
     end_options = ["Play Again", "Exit to Main Menu", "Exit to Desktop"]
     end_menu_display = TerminalMenu(end_options)
     menu_entry_index = end_menu_display.show()
