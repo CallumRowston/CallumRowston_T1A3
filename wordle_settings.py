@@ -1,58 +1,55 @@
-import os
 from simple_term_menu import TerminalMenu
 import wordle_game
 
 def game_settings_menu():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    # wordle_game.clear_screen()
     print(
         "~~ Current Settings ~~\n\n"
         f"Word Length: {wordle_game.WORD_LENGTH_SETTING}\n"
         f"Attempts: {wordle_game.TOTAL_GUESSES_SETTING}\n\n"
         "**WARNING! Statistics are only tracked for\ngames played with default settings**\n"
         )
-    setting_options = ["Set word length", "Set total guesses", "Reset To Default Settings", "Back to Main Menu"]
+    setting_options = ["Set Word Length", "Set Max guesses", "Reset To Default Settings", "Back To Main Menu"]
     setting_menu_display = TerminalMenu(setting_options)
     menu_entry_index = setting_menu_display.show()
 
-    if setting_options[menu_entry_index] == "Set word length":
-        set_word_length()
-    elif setting_options[menu_entry_index] == "Set total guesses":
-        set_total_guesses()
+    if setting_options[menu_entry_index] == "Set Word Length":
+        wordle_game.WORD_LENGTH_SETTING = settings_user_input('word length', 5, 9)
+        game_settings_menu()
+    elif setting_options[menu_entry_index] == "Set Max Guesses":
+        wordle_game.TOTAL_GUESSES_SETTING = settings_user_input('max guesses', 6, 10)
+        game_settings_menu()
     elif setting_options[menu_entry_index] == "Reset To Default Settings":
         wordle_game.WORD_LENGTH_SETTING = 5
         wordle_game.TOTAL_GUESSES_SETTING = 6
         game_settings_menu()
-    elif setting_options[menu_entry_index] == "Back to Main Menu":
+    elif setting_options[menu_entry_index] == "Back To Main Menu":
         wordle_game.main_menu()
 
-def set_word_length():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    length_options = ["5 - Default", "6", "7", "8"]
-    length_menu_display = TerminalMenu(length_options)
-    menu_entry_index = length_menu_display.show()
+def settings_user_input(setting_description, start_range, end_range):
+    print(
+        f"Enter a number {start_range} - {end_range - 1} to set the games {setting_description} to that number.\n"
+        f"{start_range} is the default {setting_description}.\n"
+        "Type 'back' to cancel making any changes.\n"
+        )
+    user_setting = ''
+    while user_setting != 'back':
+        try:
+            user_setting = input()
+            if user_setting == 'back':
+                game_settings_menu()
+            user_setting = int(user_setting)
+        except ValueError:
+            print("That doesn't look like a number. Try again.")
+        else:
+            try:
+                if user_setting not in range(start_range, end_range):
+                    wordle_game.clear_screen()
+                    raise RangeError(f"Oops! You can only enter {start_range}, {start_range + 1}, {start_range + 2} or {start_range + 3}. Type 'back' to exit.")
+            except RangeError as err:
+                print(err)
+            else:
+                return user_setting
 
-    if length_options[menu_entry_index] == "5 - Default":
-        wordle_game.WORD_LENGTH_SETTING = 5
-    elif length_options[menu_entry_index] == "6":
-        wordle_game.WORD_LENGTH_SETTING = 6
-    elif length_options[menu_entry_index] == "7":
-        wordle_game.WORD_LENGTH_SETTING = 7
-    elif length_options[menu_entry_index] == "8":
-        wordle_game.WORD_LENGTH_SETTING = 8
-    game_settings_menu()
-
-def set_total_guesses():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    attempt_options = ["6 - Default", "7", "8", "9"]
-    attempt_menu_display = TerminalMenu(attempt_options)
-    menu_entry_index = attempt_menu_display.show()
-    
-    if attempt_options[menu_entry_index] == "6 - Default":
-        wordle_game.TOTAL_GUESSES_SETTING = 6
-    elif attempt_options[menu_entry_index] == "7":
-        wordle_game.TOTAL_GUESSES_SETTING = 7
-    elif attempt_options[menu_entry_index] == "8":
-        wordle_game.TOTAL_GUESSES_SETTING = 8
-    elif attempt_options[menu_entry_index] == "9":
-        wordle_game.TOTAL_GUESSES_SETTING = 9
-    game_settings_menu()
+class RangeError(Exception):
+    pass

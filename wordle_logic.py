@@ -26,6 +26,10 @@ class WordleLogic:
     def user_loses(self):
         return self.guess_count == self.total_guesses
 
+    @property
+    def is_default(self):
+        return self.word_length == 5 and self.total_guesses == 6
+
     def set_secret_word(self):
         """Uses word list in text file to randomly select a secret word to be guessed"""
         file = f"word_list_{self.word_length}.txt"
