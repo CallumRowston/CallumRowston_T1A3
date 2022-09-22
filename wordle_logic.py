@@ -4,9 +4,6 @@ import json
 
 class WordleLogic:
     """Contains all logic functionality behind the main gameplay loop and passes relevant data to wordle_game.py to be displayed when required"""
-    # word_length = 5
-    # total_guesses = 6
-
     def __init__(self, word_length=5, total_guesses=6):
         self.secret_word_list = []
         self.secret_word = ""

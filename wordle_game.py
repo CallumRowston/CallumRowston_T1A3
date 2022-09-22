@@ -10,14 +10,13 @@ TOTAL_GUESSES_SETTING = 6
 
 # Main game loop and Menus
 def main_menu():
-    """Main menu to navigate to the main game, rules, stats or quit."""
+    """Main menu to navigate to the main game, rules, settings, stats or quit."""
     os.system('cls' if os.name == 'nt' else 'clear')
     print(f"Welcome to {Fore.GREEN}PY{Fore.YELLOW}WORDLE{Fore.RESET}\nUse up and down arrow keys to navigate menu.\nPress ENTER to select an option.\n")
-    print(WORD_LENGTH_SETTING) #debug
-    print(TOTAL_GUESSES_SETTING) #debug
     options = ["Play PyWordle", "Rules", "Game Settings", "Stats", "Quit"]
     main_menu_display = TerminalMenu(options)
     menu_entry_index = main_menu_display.show()
+
     if options[menu_entry_index] == "Play PyWordle":
         play_pywordle()
     elif options[menu_entry_index] == "Rules":
@@ -34,9 +33,6 @@ def play_pywordle():
     """Main gameplay loop. Calls methods from instance of WordleLogic class."""
     os.system('cls' if os.name == 'nt' else 'clear')
     wordle = WordleLogic(WORD_LENGTH_SETTING, TOTAL_GUESSES_SETTING)
-    print(wordle.secret_word) # debug
-    print(wordle.word_length)
-    print(wordle.total_guesses)
     while wordle.play_wordle:
         try:
             user_guess = input(f"Enter a {WORD_LENGTH_SETTING} letter word: ").upper()
@@ -60,7 +56,7 @@ def play_pywordle():
                 end_menu()
 
 def rules():
-    """Prints the rules for the game on a clear terminal"""
+    """Displays the rules for the game"""
     os.system('cls' if os.name == 'nt' else 'clear')
     print(
         "~~ Rules ~~\n\n"
@@ -78,6 +74,7 @@ def rules():
     rules_menu_display = TerminalMenu(rules_options)
     menu_entry_index = rules_menu_display.show()
     print("Press ENTER to return to the main menu.")
+
     if rules_options[menu_entry_index] == "Back to Main Menu":
         main_menu()
 
@@ -103,6 +100,7 @@ def display_stats():
     stats_menu_display = TerminalMenu(stats_options)
     menu_entry_index = stats_menu_display.show()
     os.system('cls' if os.name == 'nt' else 'clear')
+
     if stats_options[menu_entry_index] == "Back to Main Menu":
         main_menu()
     elif stats_options[menu_entry_index] == "Exit to Desktop":
@@ -114,6 +112,7 @@ def end_menu():
     end_menu_display = TerminalMenu(end_options)
     menu_entry_index = end_menu_display.show()
     os.system('cls' if os.name == 'nt' else 'clear')
+
     if end_options[menu_entry_index] == "Play Again":
         play_pywordle()
     elif end_options[menu_entry_index] == "Exit to Main Menu":
