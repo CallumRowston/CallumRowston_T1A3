@@ -2,6 +2,7 @@ import random
 from colorama import Fore
 import json
 
+# Main Game Loop Functionality and Logic
 class WordleLogic:
     """Contains all logic and functionality behind the main gameplay loop. Passes relevant data to wordle_game.py to be displayed when required"""
     def __init__(self, word_length=5, total_guesses=6):
@@ -40,6 +41,10 @@ class WordleLogic:
             
     def validate_user_guess(self, user_guess):
         """Checks user guess is valid input before setting as instance variable
+
+        Args:
+            user_guess (str): The user input to be validated
+
         Raises:
             WordLengthError: If user guess is not word_length characters long
             NotRealWordError: If user guess is not in the secret_word_list

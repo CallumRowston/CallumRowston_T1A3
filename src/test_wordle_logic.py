@@ -1,5 +1,6 @@
-from wordle_logic import WordleLogic, WordLengthError, NotRealWordError
 import pytest
+from wordle_logic import WordleLogic, WordLengthError, NotRealWordError
+
 
 class TestValidateUserGuess:
     """Tests validate_user_guess method from WordleLogic class"""
@@ -74,6 +75,7 @@ class TestCompareUserGuess:
         assert wordle.compare_user_guess() == ['Pgreen', 'Ryellow', 'I', 'N', 'T']
 
     def test_compare_user_guess_paper(self):
+        """Tests letters with 2 occruences are compared correctly."""
         wordle = WordleLogic()
         wordle.secret_word = "PRINT"
         wordle.current_guess = "PAPER"
