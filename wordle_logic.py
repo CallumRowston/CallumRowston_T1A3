@@ -94,6 +94,7 @@ class WordleLogic:
         self.guess_results.append(colored_guess_str)
         print(*(guess for guess in self.guess_results), sep='\n')
         print(*("  _" * self.word_length for _ in range(self.total_guesses - self.guess_count)), sep='\n')
+        print("")
 
     def add_game_stats(self):
         """Adds results of the game to the JSON file statistics"""

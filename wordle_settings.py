@@ -6,7 +6,7 @@ def game_settings_menu():
     """Provides user a menu to choose to change game settings; word length or total guesses. Reset to default menu option to return game settings to original values."""
     wordle_game.clear_screen()
     print(
-        "~~ Current Settings ~~\n\n"
+        f"~~ {Fore.GREEN}Current {Fore.YELLOW}Settings{Fore.RESET} ~~\n\n"
         f"Word Length: {wordle_game.WORD_LENGTH_SETTING}\n"
         f"Attempts: {wordle_game.TOTAL_GUESSES_SETTING}\n\n"
         f"**{Fore.RED}WARNING!{Fore.RESET} Statistics are only tracked for\ngames played with default settings**\n"
@@ -17,11 +17,11 @@ def game_settings_menu():
 
     if setting_options[menu_entry_index] == "Set Word Length":
         wordle_game.clear_screen()
-        wordle_game.WORD_LENGTH_SETTING = settings_user_input('word length', 5, 9)
+        wordle_game.WORD_LENGTH_SETTING = settings_user_input('Word Length', 5, 9)
         game_settings_menu()
     elif setting_options[menu_entry_index] == "Set Max Guesses":
         wordle_game.clear_screen()
-        wordle_game.TOTAL_GUESSES_SETTING = settings_user_input('max guesses', 6, 10)
+        wordle_game.TOTAL_GUESSES_SETTING = settings_user_input('Max Guesses', 6, 10)
         game_settings_menu()
     elif setting_options[menu_entry_index] == "Reset To Default Settings":
         wordle_game.WORD_LENGTH_SETTING = 5
@@ -46,6 +46,7 @@ def settings_user_input(setting_description, start_range, end_range):
         int: Value to set the selected setting to.
     """
     print(
+        f"~~ {Fore.GREEN}Set {Fore.YELLOW}{setting_description}{Fore.RESET} ~~\n\n"
         f"Enter a number {start_range} - {end_range - 1} to set the games {setting_description} to that number.\n"
         f"{start_range} is the default {setting_description}.\n"
         "Type 'back' to cancel making any changes.\n"
