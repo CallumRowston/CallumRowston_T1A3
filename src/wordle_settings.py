@@ -3,7 +3,8 @@ from colorama import Fore
 import wordle_game
 
 def game_settings_menu():
-    """Provides user a menu to choose to change game settings; word length or total guesses. Reset to default menu option to return game settings to original values."""
+    """Provides user a menu to choose to change game settings; word length or total guesses.
+        Reset to default menu option to return game settings to original values."""
     wordle_game.clear_screen()
     print(
         f"~~ {Fore.GREEN}Current {Fore.YELLOW}Settings{Fore.RESET} ~~\n\n"
@@ -31,7 +32,8 @@ def game_settings_menu():
         wordle_game.main_menu()
 
 def settings_user_input(setting_description, start_range, end_range):
-    """Checks user input for word length or total guesses setting. Sets selected setting to the entered number if valid input.
+    """Checks user input for word length or total guesses setting. Sets selected setting to the
+        entered number if valid input.
 
     Args:
         setting_description (str): describes to the user the setting being changed

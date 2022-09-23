@@ -1,21 +1,27 @@
 # Welcome to PYWORDLE !
 
-## R4 - Repo
-[GitHub Repository](https://github.com/CallumRowston/CallumRowston_T1A3)
-
 ## Table Of Contents
 
 - [Related Documents]()
+- [Overview]()
 - [Features]()
 - [Implementation Plan]()
+- [Style Guide]()
+- [Reference List]()
 
 ## Related Documents
 
-Help File
+[GitHub Repository](https://github.com/CallumRowston/CallumRowston_T1A3)
 
-Trello
+[Help Document](docs/help.md)
 
-## R6 - Features
+[Trello Workspace](https://trello.com/b/LimXSz09/wordle-app-t1a3)
+
+## Overview
+
+PYWORDLE is a terminal based word guessing puzzle game heavily inspired by the New York Times browser based game, Wordle that became hugely popular in early 2022. It includes a visually informative coloured game board, statistics tracking, menu navigation, and game settings not found in the original Wordle.
+
+## Features
 
 ### Coloured Game Board
 
@@ -87,7 +93,33 @@ Trello was used to track and manage the status of tasks required to develop this
 - Add sub menu options to return to the mian menu
 - Add menu option to quit the application
 
-## R3 - References
+The Trello Workspace changed throughout the week as these tasks were completed. This can be seen below:
+
+![mid-trello-workspace](docs/trello-midway.png)
+![testing-trello-workspace](docs/trellow-testing.png)
+![near-end-trello-workspace](docs/trello-near-end.png)
+![trello-final](docs/trello-final.png)
+
+## Testing
+
+This application was tested using unit testing implemented through the pytest module. Two highly important functions were tested this way:
+
+- `validate_user_guess` -  A method of the WordleLogic class that checks the users guess is the correct length and is an actual valid word. Tests include checking the correct exceptions are raised under the correct circumstances and if no exceptions are raised, testing that the relevant instance attributes are adjusted as expected.
+- `compare_user_guess` -  A method of the WordleLogic class that checks the user guess against the secret word. Tests include checking that each letter of the user guess is marked correctly in relation to the secret word, so that correct letters are marked 'green', partially correct letters are marked 'yellow' and incorrect letters are not marked. 
+
+A broader array of manual testing was performed over the entire terminal application as outlined in the table below.
+
+|Feature   |Expected Outcome   |Test Outcome   |
+|----|----|----|
+|    |    |    |
+|    |    |    |
+|    |    |    |
+
+## Style Guide
+
+This code conforms to the [PEP 8 Style Guide For Python Code](https://peps.python.org/pep-0008/).
+
+## References
 
 Terminal Application idea heavily influenced by Wordle, created by Josh Wardle. Original game accessed at: https://www.nytimes.com/games/wordle/index.html
 
@@ -98,7 +130,3 @@ Terminal Application idea heavily influenced by Wordle, created by Josh Wardle. 
 7 letter word list. TheFreeDictionary by Farlex. Accessed: https://www.thefreedictionary.com/7-letter-words.htm
 
 8 letter word list. TheFreeDictionary by Farlex. Accessed: https://www.thefreedictionary.com/8-letter-words.htm
-
-## Style Guide
-
-Style Guide: [PEP 8 - Style Guide For Python Code](https://peps.python.org/pep-0008/)

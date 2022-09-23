@@ -1,6 +1,6 @@
+from simple_term_menu import TerminalMenu
 from wordle_logic import WordleLogic, WordLengthError, NotRealWordError
 from colorama import Fore
-from simple_term_menu import TerminalMenu
 import wordle_rules
 import wordle_settings
 import wordle_stats

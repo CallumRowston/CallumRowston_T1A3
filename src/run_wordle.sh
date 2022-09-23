@@ -25,7 +25,7 @@ fi
 
 source .venv/bin/activate
 
-echo "Checking pip is installed..."
+echo "Checking if pip is installed..."
 if [[ -x "$(command -v pip)" ]]
 then
     echo "pip is installed!"
@@ -36,5 +36,5 @@ fi
 
 echo "Installing required packages..."
 pip install -r requirements.txt
-echo "Success! Starting game..."
+echo "Starting game..."
 python3 wordle_game.py

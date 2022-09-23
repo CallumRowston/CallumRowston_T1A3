@@ -1,6 +1,6 @@
+from simple_term_menu import TerminalMenu
 import wordle_game
 from colorama import Fore
-from simple_term_menu import TerminalMenu
 import json
 
 def display_stats():
