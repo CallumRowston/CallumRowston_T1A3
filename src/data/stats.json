@@ -1,0 +1,15 @@
+{
+    "Guess Distribution": {
+        "1": 0,
+        "2": 1,
+        "3": 0,
+        "4": 0,
+        "5": 1,
+        "6": 2
+    },
+    "Overall Stats": {
+        "Games Played": 4,
+        "Games Won": 2,
+        "Win %": 50
+    }
+}

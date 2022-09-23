@@ -10,6 +10,9 @@ Help File
 Trello
 
 ## R3 and R5 - References
+
+Terminal Application idea heavily influenced by Wordle, created by Josh Wardle. Play at https://www.nytimes.com/games/wordle/index.html
+
 Style Guide: [PEP 8 - Style Guide For Python Code](https://peps.python.org/pep-0008/)
 
 5 letter word list. Stanford University Computer Science Facility. Accessed: https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt

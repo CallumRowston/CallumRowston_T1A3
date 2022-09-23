@@ -6,7 +6,7 @@ import json
 def display_stats():
     """Displays statistics from JSON file. Provides guess distribution in table format."""
     wordle_game.clear_screen()
-    with open("stats.json", "r") as stats:
+    with open("data/stats.json", "r") as stats:
         data = json.load(stats)
         overall_stats = data["Overall Stats"]
         guess_distribution = data["Guess Distribution"]
