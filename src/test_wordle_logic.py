@@ -1,7 +1,6 @@
 import pytest
 from wordle_logic import WordleLogic, WordLengthError, NotRealWordError
 
-
 class TestValidateUserGuess:
     """Tests validate_user_guess method from WordleLogic class"""
     def test_raises_word_length_exception(self):
