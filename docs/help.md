@@ -2,12 +2,12 @@
 
 ## Installation Instructions
 
-1. From GitHub, download the [repository](https://github.com/CallumRowston/CallumRowston_T1A3) to your computer.
+1. From the [GitHub repository](https://github.com/CallumRowston/CallumRowston_T1A3), download the source files to your computer.
    Alternatively you can clone the repository by entering the following command in the terminal:
 
     `git clone https://github.com/CallumRowston/CallumRowston_T1A3.git`
 
-2. Navigate to the `src` folder from where you have saved or cloned the repository by entering:
+2. Using the terminal, navigate to the `src` folder from the directory where you have saved or cloned the repository by entering:
 
     `cd CallumRowston_T1A3/src`
 

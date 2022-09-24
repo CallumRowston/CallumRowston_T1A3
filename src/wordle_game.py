@@ -7,7 +7,7 @@ import wordle_stats
 import os
 
 WORD_LENGTH_SETTING = 5
-TOTAL_GUESSES_SETTING = 6
+MAX_GUESS_SETTING = 6
 
 # Menus and main game loop
 def main_menu():
@@ -36,10 +36,12 @@ def main_menu():
 
 def play_pywordle():
     """Main gameplay loop. Calls methods from instance of WordleLogic class."""
-    wordle = WordleLogic(WORD_LENGTH_SETTING, TOTAL_GUESSES_SETTING)
+    wordle = WordleLogic(WORD_LENGTH_SETTING, MAX_GUESS_SETTING)
+    print()
+    print(*(("  ") + "  _" * wordle.word_length for _ in range(wordle.max_guesses)), sep='\n')
     while wordle.play_wordle:
         try:
-            user_guess = input(f"\n  Enter a {WORD_LENGTH_SETTING} letter word:\n  ").upper()
+            user_guess = input(f"\n\n  Enter a {WORD_LENGTH_SETTING} letter word:\n  ").upper()
             wordle.validate_user_guess(user_guess)
         except (WordLengthError, NotRealWordError) as err:
             print(err)

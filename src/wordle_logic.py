@@ -6,14 +6,14 @@ import json
 class WordleLogic:
     """Contains all logic and functionality behind the main gameplay loop. 
         Passes relevant data to wordle_game.py to be displayed when required"""
-    def __init__(self, word_length=5, total_guesses=6):
+    def __init__(self, word_length=5, max_guesses=6):
         self.secret_word_list = []
         self.secret_word = ""
         self.current_guess = ""
         self.guess_results = []
         self.guess_count = 0
         self.word_length = word_length
-        self.total_guesses = total_guesses
+        self.max_guesses = max_guesses
         self.set_secret_word()
 
     @property
@@ -26,11 +26,11 @@ class WordleLogic:
 
     @property
     def user_loses(self):
-        return self.guess_count == self.total_guesses
+        return self.guess_count == self.max_guesses
 
     @property
     def is_default(self):
-        return self.word_length == 5 and self.total_guesses == 6
+        return self.word_length == 5 and self.max_guesses == 6
 
     def set_secret_word(self):
         """Uses word list in text file to randomly select a secret word to be guessed"""
@@ -98,10 +98,9 @@ class WordleLogic:
 
         colored_guess_str = "".join(colored_guess)
         self.guess_results.append(colored_guess_str)
-        print("")
+        print()
         print(*(("  " + guess) for guess in self.guess_results), sep='\n')
-        print(*(("  ") + "  _" * self.word_length for _ in range(self.total_guesses - self.guess_count)), sep='\n')
-        print("")
+        print(*(("  ") + "  _" * self.word_length for _ in range(self.max_guesses - self.guess_count)), sep='\n')
 
     def add_game_stats(self):
         """Adds results of the game to the JSON file statistics"""

@@ -9,7 +9,7 @@ def game_settings_menu():
     print(
         f"\n  ~~ {Fore.GREEN}Current {Fore.YELLOW}Settings{Fore.RESET} ~~\n\n"
         f"  Word Length: {wordle_game.WORD_LENGTH_SETTING}\n"
-        f"  Attempts: {wordle_game.TOTAL_GUESSES_SETTING}\n\n"
+        f"  Max Attempts: {wordle_game.MAX_GUESS_SETTING}\n\n"
         f"  **{Fore.RED}WARNING!{Fore.RESET} Statistics are only tracked for\n  games played with default settings**\n"
         )
     setting_options = ["Set Word Length", "Set Max Guesses", "Reset To Default Settings", "Back To Main Menu"]
@@ -21,11 +21,11 @@ def game_settings_menu():
         game_settings_menu()
     elif setting_options[menu_entry_index] == "Set Max Guesses":
         wordle_game.clear_screen()
-        wordle_game.TOTAL_GUESSES_SETTING = settings_user_input('Max Guesses', 6, 10)
+        wordle_game.MAX_GUESS_SETTING = settings_user_input('Max Guesses', 6, 10)
         game_settings_menu()
     elif setting_options[menu_entry_index] == "Reset To Default Settings":
         wordle_game.WORD_LENGTH_SETTING = 5
-        wordle_game.TOTAL_GUESSES_SETTING = 6
+        wordle_game.MAX_GUESS_SETTING = 6
         game_settings_menu()
     elif setting_options[menu_entry_index] == "Back To Main Menu":
         wordle_game.main_menu()
@@ -71,7 +71,7 @@ def settings_user_input(setting_description, start_range, end_range):
     if user_setting == 'back' and start_range == 5:
         return wordle_game.WORD_LENGTH_SETTING
     elif user_setting == 'back' and start_range == 6:
-        return wordle_game.TOTAL_GUESSES_SETTING
+        return wordle_game.MAX_GUESS_SETTING
     
     
 class RangeError(Exception):

@@ -4,6 +4,7 @@
 
 ## Table Of Contents
 
+  - [Source Control Repository](#source-control-repositroy)
   - [Related Documents](#related-documents)
   - [Overview](#overview)
   - [Features](#features)
@@ -16,11 +17,13 @@
 
 ---
 
+## Source Control Repositroy
+
+[GitHub Repository](https://github.com/CallumRowston/CallumRowston_T1A3)
+
 ## Related Documents
 
 [Slide Deck Presentation](insert link)
-
-[GitHub Repository](https://github.com/CallumRowston/CallumRowston_T1A3)
 
 [Help Document](docs/help.md)
 
@@ -31,6 +34,8 @@
 ## Overview
 
 PYWORDLE is a terminal based word guessing puzzle game heavily inspired by the New York Times browser based game, Wordle, that became hugely popular in early 2022. It includes a visually informative coloured game board, statistics tracking, menu navigation, and game settings not found in the original Wordle game.
+
+PYWORDLE was developed as part of the requirements for a terminal application assignment. It is targeted at anyone who enjoys the original Wordle game or other word based logic puzzles and wishes to play a terminal based version with settings to increase or decrease the difficulty.
 
 ---
 
@@ -198,12 +203,12 @@ A broader array of manual testing was performed over the entire terminal applica
 
 The following instructions are also available in the [help file](docs/help.md).
 
-1. From GitHub, download the [repository](https://github.com/CallumRowston/CallumRowston_T1A3) to your computer.
+1. From the [GitHub repository](https://github.com/CallumRowston/CallumRowston_T1A3), download the source files to your computer.
    Alternatively you can clone the repository by entering the following command in the terminal:
 
     `git clone https://github.com/CallumRowston/CallumRowston_T1A3.git`
 
-2. Using the terminal, navigate to the `src` folder from where you have saved or cloned the repository by entering:
+2. Using the terminal, navigate to the `src` folder from the directory where you have saved or cloned the repository by entering:
 
     `cd CallumRowston_T1A3/src`
 
