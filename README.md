@@ -1,14 +1,18 @@
-# Welcome to PYWORDLE !
+![welcome to pywordle](docs/welcome_to_pywordle.png)
+
+# Welcome To PYWORDLE !
 
 ## Table Of Contents
 
-- [Related Documents](#related-documents)
-- [Overview](#overview)
-- [Features](#features)
-- [Gameplay Example](#gameplay-example)
-- [Implementation Plan](#implementation-plan)
-- [Style Guide](#style-guide)
-- [Reference List](#reference-list)
+  - [Related Documents](#related-documents)
+  - [Overview](#overview)
+  - [Features](#features)
+  - [Gameplay Example](#gameplay-example)
+  - [Implementation Plan](#implementation-plan)
+  - [Testing](#testing)
+  - [Installation Instructions](#installation-instructions)
+  - [Style Guide](#style-guide)
+  - [Reference List](#reference-list)
 
 ---
 
@@ -192,7 +196,7 @@ A broader array of manual testing was performed over the entire terminal applica
 
 ## Installation Instructions
 
-The following instructions are also available [here](docs/help.md)
+The following instructions are also available in the [help file](docs/help.md).
 
 1. From GitHub, download the [repository](https://github.com/CallumRowston/CallumRowston_T1A3) to your computer.
    Alternatively you can clone the repository by entering the following command in the terminal:
