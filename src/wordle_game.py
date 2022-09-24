@@ -65,7 +65,6 @@ def end_menu():
     end_menu_display = TerminalMenu(end_options)
     menu_entry_index = end_menu_display.show()
     clear_screen()
-
     if end_options[menu_entry_index] == "Play Again":
         play_pywordle()
     elif end_options[menu_entry_index] == "Exit to Main Menu":

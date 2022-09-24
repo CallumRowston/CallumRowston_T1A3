@@ -73,6 +73,6 @@ def settings_user_input(setting_description, start_range, end_range):
     elif user_setting == 'back' and start_range == 6:
         return wordle_game.TOTAL_GUESSES_SETTING
     
-
+    
 class RangeError(Exception):
     pass

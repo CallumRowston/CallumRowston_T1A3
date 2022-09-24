@@ -16,11 +16,9 @@ def display_rules():
         f"  {Fore.YELLOW}YELLOW{Fore.RESET} letters are in the word but in the wrong spot.\n"
         "  WHITE letters are not in the word anywhere.\n"
         )
-
     rules_options = ["Back to Main Menu"]
     rules_menu_display = TerminalMenu(rules_options)
     menu_entry_index = rules_menu_display.show()
     print("  Press ENTER to return to the main menu.")
-
     if rules_options[menu_entry_index] == "Back to Main Menu":
         main_menu()

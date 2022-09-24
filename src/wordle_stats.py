@@ -17,14 +17,12 @@ def display_stats():
         for key, value in guess_distribution.items():
             print("  {:<8} {:<8}".format(key, value))
         print("")
-
     print("  **Statistics are only tracked for\ngames played with default settings**\n")
 
     stats_options = ["Back to Main Menu", "Exit to Desktop"]
     stats_menu_display = TerminalMenu(stats_options)
     menu_entry_index = stats_menu_display.show()
     wordle_game.clear_screen()
-
     if stats_options[menu_entry_index] == "Back to Main Menu":
         wordle_game.main_menu()
     elif stats_options[menu_entry_index] == "Exit to Desktop":

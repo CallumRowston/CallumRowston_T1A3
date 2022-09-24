@@ -2,14 +2,19 @@
 
 ## Table Of Contents
 
-- [Related Documents]()
-- [Overview]()
-- [Features]()
-- [Implementation Plan]()
-- [Style Guide]()
-- [Reference List]()
+- [Related Documents](#related-documents)
+- [Overview](#overview)
+- [Features](#features)
+- [Gameplay Example](#gameplay-example)
+- [Implementation Plan](#implementation-plan)
+- [Style Guide](#style-guide)
+- [Reference List](#reference-list)
+
+---
 
 ## Related Documents
+
+[Slide Deck Presentation](insert link)
 
 [GitHub Repository](https://github.com/CallumRowston/CallumRowston_T1A3)
 
@@ -17,9 +22,13 @@
 
 [Trello Workspace](https://trello.com/b/LimXSz09/wordle-app-t1a3)
 
+---
+
 ## Overview
 
-PYWORDLE is a terminal based word guessing puzzle game heavily inspired by the New York Times browser based game, Wordle that became hugely popular in early 2022. It includes a visually informative coloured game board, statistics tracking, menu navigation, and game settings not found in the original Wordle.
+PYWORDLE is a terminal based word guessing puzzle game heavily inspired by the New York Times browser based game, Wordle, that became hugely popular in early 2022. It includes a visually informative coloured game board, statistics tracking, menu navigation, and game settings not found in the original Wordle game.
+
+---
 
 ## Features
 
@@ -43,7 +52,27 @@ The player can set the secret word length to 5(default), 6, 7 or 8 and the lengt
 
 Outside of the main gameplay loop, a menu system has been implemented to navigate to dfferent pages; a rules page to explain how to play, a stats page to display the players statistics, a game settings page with further menus to input settings, and a quit option to exit the application
 
-## Implementation Plan - [Trello Workspace](https://trello.com/b/LimXSz09/wordle-app-t1a3)
+---
+
+## Gameplay Example
+
+### Round 1
+
+![wordle_round_1](docs/game_round_1.png)
+
+### Round 2
+
+![wordle_round_2](docs/game_round_2.png)
+
+### Round 3
+
+![wordle_round_3](docs/game_round_3.png)
+
+---
+
+## Implementation Plan
+
+[Open Trello Workspace](https://trello.com/b/LimXSz09/wordle-app-t1a3)
 
 Trello was used to track and manage the status of tasks required to develop this application. Each feature is listed below in order of development along with a checklist of requirements to implement it. 
 
@@ -120,6 +149,8 @@ The Trello Workspace changed throughout the week as these tasks were completed. 
 
 ![trello-final](docs/trello-final.png)
 
+---
+
 ## Testing
 
 This application was tested using unit testing implemented through the pytest module. Two highly important functions were tested this way:
@@ -127,23 +158,68 @@ This application was tested using unit testing implemented through the pytest mo
 - `validate_user_guess` -  A method of the WordleLogic class that checks the users guess is the correct length and is an actual valid word. Tests include checking the correct exceptions are raised under the correct circumstances and if no exceptions are raised, testing that the relevant instance attributes are adjusted as expected.
 - `compare_user_guess` -  A method of the WordleLogic class that checks the user guess against the secret word. Tests include checking that each letter of the user guess is marked correctly in relation to the secret word, so that correct letters are marked 'green', partially correct letters are marked 'yellow' and incorrect letters are not marked.
 
+These tests can be found in `src/test_wordle_logic.py`
+
 A broader array of manual testing was performed over the entire terminal application as outlined in the table below.
 
 |Test  |Expected Outcome   |Test Outcome   |
 |----|----|----|
-|    |    |    |
-|    |    |    |
-|    |    |    |
+|Test when user guesses 'crate' and the secret word is 'CRATE'|The word 'CRATE' is printed in green and the game condition user_wins will return True    |As expected    |
+|Test when user guesses 'crate' and the secret word is 'CRANE'|The letters 'C', 'R', 'A' and 'E' will be printed in green and 'T' will be printed in white in order C-R-A-N-E    |As expected    |
+|Test when user has remaining guesses|A new line with underscores for the amount of letters in the word is printed below the users most recent guess    |As expected    |
+|Test when user_wins returns True |Print the user wins and number of guesses and end_menu() will be called to allow the user to play again or exit    |As expected    |
+|Test when user_loses returns True |Print the user loses and end menu() will be called to allow the user to play again or exit   |As expected   |
+|Test when user_wins or user_loses returns True and game_is_default returns True    |add_game_stats() will be called and correctly update stats.json    |As expected    |
+|Test when user accesses stats menu    |Displays cumulative stats from current and previous sessions and return menu    |As expected    |
+|Test when user accesses rules menu    |Displays rules with correct formatting and return menu    |As expected     |
+|Test when user selects Quit or Exit to desktop from a menu    |Game prints that it is quitting and the application terminates    |As expected    |
+|Test when user selects Back To Main Menu from a menu    |Game returns to the main menu    |As expected    |
+|Test when user accesses game settings menu    |Displays current settings, warning, and second menu to change settings    |As expected    |
+|Test when user selects Set Word Length menu option and enters 8    |Global variable WORD_LENGTH_SETTING is set to 8    |As expected    |
+|Test when user selects Set Word Length menu option and enters 9    |RangeError is raised and user prompted to try again    |As expected    |
+|Test when user selects Set Word Length menu option and enters 'nothing'    |ValueError is raised and user prompted to try again    |As expected    |
+|Test when user selects Set Word Length menu option and enters 'back'     |The application returns to the game settings menu    |As expected    |
+|Test when user selects Set Total Guesses menu option and enters 9    |Global variable TOTAL_GUESSES_SETTING is set to 9    |As expected    |
+|Test when user selects Set Total Guesses menu option and enters 10    |RangeError is raised and user prompted to try again    |As expected    |
+|Test when user selects Set Total Guesses menu option and enters 'nothing'    |ValueError is raised and user prompted to try again    |As expected    |
+|Test when user selects Set Total Guesses menu option and enters 'back'     |The application returns to the game settings menu    |As expected    |
+|Test when Reset To Default Settings menu option is selected    |WORD_LENGTH_SETTING is set to 5 and TOTAL_GUESSES_SETTING is set to 6    |As expected    |
+|Test when WORD_LENGTH_SETTING is set to 8    |Secret word will be an 8 letter word and the user can only enter 8 letter words    |As expected    |
+|Test when TOTAL_GUESSES_SETTING is set to 9    |User is allowed 9 guesses before user_loses returns True    |As expected    |
+|Test when WORD_LENGTH_SETTING is set to 6 and TOTAL_GUESSES_SETTING is set to 7    |Secret word will be a 6 letter word and the user can only enter 6 letter words and user is allowed 7 guesses before user_loses returns True    |As expected    |
+
+---
+
+## Installation Instructions
+
+The following instructions are also available [here](docs/help.md)
+
+1. From GitHub, download the [repository](https://github.com/CallumRowston/CallumRowston_T1A3) to your computer.
+   Alternatively you can clone the repository by entering the following command in the terminal:
+
+    `git clone https://github.com/CallumRowston/CallumRowston_T1A3.git`
+
+2. Using the terminal, navigate to the `src` folder from where you have saved or cloned the repository by entering:
+
+    `cd CallumRowston_T1A3/src`
+
+3. Enter the following command to check and install all required dependencies and start the application:
+
+    `source run_wordle.sh`
+
+---
 
 ## Style Guide
 
 This code conforms to the [PEP 8 Style Guide For Python Code](https://peps.python.org/pep-0008/).
 
-## References
+---
+
+## Reference List
 
 Terminal Application idea heavily influenced by Wordle, created by Josh Wardle. Original game accessed at: https://www.nytimes.com/games/wordle/index.html
 
-5 letter word list. Stanford University Computer Science Facility. Accessed: https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt
+5 letter word list. Stanford University Computer Science Faculty. Accessed: https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt
 
 6 letter word list. TheFreeDictionary by Farlex. Accessed: https://www.thefreedictionary.com/6-letter-words.htm
 
