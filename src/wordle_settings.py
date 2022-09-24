@@ -7,10 +7,10 @@ def game_settings_menu():
         Reset to default menu option to return game settings to original values."""
     wordle_game.clear_screen()
     print(
-        f"~~ {Fore.GREEN}Current {Fore.YELLOW}Settings{Fore.RESET} ~~\n\n"
-        f"Word Length: {wordle_game.WORD_LENGTH_SETTING}\n"
-        f"Attempts: {wordle_game.TOTAL_GUESSES_SETTING}\n\n"
-        f"**{Fore.RED}WARNING!{Fore.RESET} Statistics are only tracked for\ngames played with default settings**\n"
+        f"\n  ~~ {Fore.GREEN}Current {Fore.YELLOW}Settings{Fore.RESET} ~~\n\n"
+        f"  Word Length: {wordle_game.WORD_LENGTH_SETTING}\n"
+        f"  Attempts: {wordle_game.TOTAL_GUESSES_SETTING}\n\n"
+        f"  **{Fore.RED}WARNING!{Fore.RESET} Statistics are only tracked for\n  games played with default settings**\n"
         )
     setting_options = ["Set Word Length", "Set Max Guesses", "Reset To Default Settings", "Back To Main Menu"]
     setting_menu_display = TerminalMenu(setting_options)
@@ -47,27 +47,27 @@ def settings_user_input(setting_description, start_range, end_range):
         int: Value to set the selected setting to.
     """
     print(
-        f"~~ {Fore.GREEN}Set {Fore.YELLOW}{setting_description}{Fore.RESET} ~~\n\n"
-        f"Enter a number {start_range} - {end_range - 1} to set the games {setting_description} to that number.\n"
-        f"{start_range} is the default {setting_description}.\n"
-        "Type 'back' to cancel making any changes.\n"
+        f"\n  ~~ {Fore.GREEN}Set {Fore.YELLOW}{setting_description}{Fore.RESET} ~~\n\n"
+        f"  Enter a number {start_range} - {end_range - 1} to set the games {setting_description} to that number.\n"
+        f"  {start_range} is the default {setting_description}.\n"
+        "  Type 'back' to cancel making any changes.\n"
         )
     user_setting = ''
     while user_setting != 'back':
-        user_setting = input()
+        user_setting = input("  ")
         try:
             user_setting = int(user_setting)
         except ValueError:
-            print("That doesn't look like a real setting. Try again or type 'back' to exit.")
+            print("  That doesn't look like a real setting. Try again or type 'back' to exit.")
         else:
             try:
                 if user_setting not in range(start_range, end_range):
-                    raise RangeError(f"Oops! You can only enter {start_range}, {start_range + 1}, {start_range + 2} or {start_range + 3}. Type 'back' to exit.")
+                    raise RangeError(f"  Oops! You can only enter {start_range}, {start_range + 1}, {start_range + 2} or {start_range + 3}. Type 'back' to exit.")
             except RangeError as err:
                 print(err)
             else:
                 return user_setting
-                
+
     if user_setting == 'back' and start_range == 5:
         return wordle_game.WORD_LENGTH_SETTING
     elif user_setting == 'back' and start_range == 6:

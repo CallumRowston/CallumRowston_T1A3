@@ -2,16 +2,18 @@
 
 ## Installation Instructions
 
-1. From GitHub, clone or download the repository to your computer.
-2. Open your terminal in the root directory of the repository.
-3. Enter the following command:
+1. From GitHub, download the [repository](https://github.com/CallumRowston/CallumRowston_T1A3) to your computer.
+   Alternatively you can clone the repository by entering the following command in the terminal:
+
+    `git clone https://github.com/CallumRowston/CallumRowston_T1A3.git`
+
+2. Navigate to the `src` folder from where you have saved or cloned the repository by entering:
 
     `cd src`
 
-4. Enter the following command to install all required dependencies and start the application:
+3. Enter the following command to check and install all required dependencies and start the application:
 
     `source run_wordle.sh`
-
 
 ## Dependencies
 

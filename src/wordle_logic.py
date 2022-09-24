@@ -51,9 +51,9 @@ class WordleLogic:
             NotRealWordError: If user guess is not in the secret_word_list
         """
         if len(user_guess) != self.word_length:
-            raise WordLengthError(f"Your guess must be {self.word_length} letters long. Guess again.")
+            raise WordLengthError(f"  Your guess must be {self.word_length} letters long. Guess again.")
         if user_guess not in self.secret_word_list:
-            raise NotRealWordError(f"{user_guess} is not a valid word. Guess again.")
+            raise NotRealWordError(f"  {user_guess} is not a valid word. Guess again.")
         
         self.current_guess = user_guess
         self.guess_count += 1
@@ -98,8 +98,9 @@ class WordleLogic:
 
         colored_guess_str = "".join(colored_guess)
         self.guess_results.append(colored_guess_str)
-        print(*(guess for guess in self.guess_results), sep='\n')
-        print(*("  _" * self.word_length for _ in range(self.total_guesses - self.guess_count)), sep='\n')
+        print("")
+        print(*(("  " + guess) for guess in self.guess_results), sep='\n')
+        print(*(("  ") + "  _" * self.word_length for _ in range(self.total_guesses - self.guess_count)), sep='\n')
         print("")
 
     def add_game_stats(self):
