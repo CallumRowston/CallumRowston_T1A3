@@ -43,7 +43,7 @@ The player can set the secret word length to 5(default), 6, 7 or 8 and the lengt
 
 Outside of the main gameplay loop, a menu system has been implemented to navigate to dfferent pages; a rules page to explain how to play, a stats page to display the players statistics, a game settings page with further menus to input settings, and a quit option to exit the application
 
-## Implementation Plan - [Trello Board](https://trello.com/b/LimXSz09/wordle-app-t1a3)
+## Implementation Plan - [Trello Workspace](https://trello.com/b/LimXSz09/wordle-app-t1a3)
 
 Trello was used to track and manage the status of tasks required to develop this application. Each feature is listed below in order of development along with a checklist of requirements to implement it. 
 
@@ -71,8 +71,9 @@ Trello was used to track and manage the status of tasks required to develop this
 
 - Create a JSON file formatted to accept the required statistics
 - At game end, store the gueeses taken, if the game was won and add 1 to total games played
-- Add these stats to the JSON file
+- Update the JSON file with these stats
 - Create a way for the user to view the stats - print the JSON file formatted neatly
+- Inform the user stats are only tracked in games with default settings
 
 ### Custom Game Settings
 
@@ -81,7 +82,7 @@ Trello was used to track and manage the status of tasks required to develop this
 - Handle any exceptions relating to the user input
 - Provide a way for the user to reset these values
 - Display the changed values
-- Inform the user the statistics feature is turned off if they are not playing with default settings
+- Make obvious to the user that the statistics feature is turned off if they are not playing with default settings
 
 ### Menus
 
@@ -95,9 +96,28 @@ Trello was used to track and manage the status of tasks required to develop this
 
 The Trello Workspace changed throughout the week as these tasks were completed. This can be seen below:
 
+### Sunday
+
+![start-trello-workspace](docs/trello-start.png)
+
+### Monday
+
+![early-trello-workspace](docs/trello-early.png)
+
+### Tuesday
+
 ![mid-trello-workspace](docs/trello-midway.png)
+
+### Wednesday
+
 ![testing-trello-workspace](docs/trellow-testing.png)
+
+### Thursday
+
 ![near-end-trello-workspace](docs/trello-near-end.png)
+
+### Friday
+
 ![trello-final](docs/trello-final.png)
 
 ## Testing
@@ -105,11 +125,11 @@ The Trello Workspace changed throughout the week as these tasks were completed. 
 This application was tested using unit testing implemented through the pytest module. Two highly important functions were tested this way:
 
 - `validate_user_guess` -  A method of the WordleLogic class that checks the users guess is the correct length and is an actual valid word. Tests include checking the correct exceptions are raised under the correct circumstances and if no exceptions are raised, testing that the relevant instance attributes are adjusted as expected.
-- `compare_user_guess` -  A method of the WordleLogic class that checks the user guess against the secret word. Tests include checking that each letter of the user guess is marked correctly in relation to the secret word, so that correct letters are marked 'green', partially correct letters are marked 'yellow' and incorrect letters are not marked. 
+- `compare_user_guess` -  A method of the WordleLogic class that checks the user guess against the secret word. Tests include checking that each letter of the user guess is marked correctly in relation to the secret word, so that correct letters are marked 'green', partially correct letters are marked 'yellow' and incorrect letters are not marked.
 
 A broader array of manual testing was performed over the entire terminal application as outlined in the table below.
 
-|Feature   |Expected Outcome   |Test Outcome   |
+|Test  |Expected Outcome   |Test Outcome   |
 |----|----|----|
 |    |    |    |
 |    |    |    |

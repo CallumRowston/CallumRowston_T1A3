@@ -31,6 +31,7 @@ def main_menu():
     elif options[menu_entry_index] == "Stats":
         wordle_stats.display_stats()
     elif options[menu_entry_index] == "Quit":
+        clear_screen()
         quit_messager()
 
 def play_pywordle():

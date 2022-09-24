@@ -12,13 +12,11 @@
 
     `source run_wordle.sh`
 
+
 ## Dependencies
 
 + Python3
 + Third Party Python Packages
   
-    + [Colorama](https://pypi.org/project/colorama/)
-    + [Simple Terminal Menu](https://pypi.org/project/simple-term-menu/)
-    + [colorama]()
-
-
+  + [Colorama](https://pypi.org/project/colorama/)
+  + [Simple Terminal Menu](https://pypi.org/project/simple-term-menu/)

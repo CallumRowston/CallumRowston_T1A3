@@ -13,6 +13,15 @@ then
     fi 
 fi
 
+echo "Checking if pip is installed..."
+if [[ -x "$(command -v pip)" ]]
+then
+    echo "pip is installed!"
+else
+    echo "pip is not installed. Installing pip..."
+    sudo apt install python3-pip
+fi
+
 echo "Checking for a virtual environment..."
 DIR=.venv
 if [[ -d "$DIR" ]]
@@ -25,16 +34,7 @@ fi
 
 source .venv/bin/activate
 
-echo "Checking if pip is installed..."
-if [[ -x "$(command -v pip)" ]]
-then
-    echo "pip is installed!"
-else
-    echo "pip is not installed. Installing pip..."
-    python -m ensurepip --upgrade
-fi
-
-echo "Installing required packages..."
+echo "CHecking for required packages..."
 pip install -r requirements.txt
 echo "Starting game..."
 python3 wordle_game.py

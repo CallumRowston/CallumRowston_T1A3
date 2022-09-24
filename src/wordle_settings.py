@@ -15,7 +15,6 @@ def game_settings_menu():
     setting_options = ["Set Word Length", "Set Max Guesses", "Reset To Default Settings", "Back To Main Menu"]
     setting_menu_display = TerminalMenu(setting_options)
     menu_entry_index = setting_menu_display.show()
-
     if setting_options[menu_entry_index] == "Set Word Length":
         wordle_game.clear_screen()
         wordle_game.WORD_LENGTH_SETTING = settings_user_input('Word Length', 5, 9)
@@ -55,10 +54,8 @@ def settings_user_input(setting_description, start_range, end_range):
         )
     user_setting = ''
     while user_setting != 'back':
+        user_setting = input()
         try:
-            user_setting = input()
-            if user_setting == 'back':
-                game_settings_menu()
             user_setting = int(user_setting)
         except ValueError:
             print("That doesn't look like a real setting. Try again or type 'back' to exit.")
@@ -70,6 +67,12 @@ def settings_user_input(setting_description, start_range, end_range):
                 print(err)
             else:
                 return user_setting
+                
+    if user_setting == 'back' and start_range == 5:
+        return wordle_game.WORD_LENGTH_SETTING
+    elif user_setting == 'back' and start_range == 6:
+        return wordle_game.TOTAL_GUESSES_SETTING
+    
 
 class RangeError(Exception):
     pass
