@@ -7,6 +7,12 @@ class WordleLogic:
     """Contains all logic and functionality behind the main gameplay loop. 
         Passes relevant data to wordle_game.py to be displayed when required"""
     def __init__(self, word_length=5, max_guesses=6):
+        """Constructs neccessary attributes for a new game to be played
+
+        Args:
+            word_length (int, optional): Current word length setting as set in Game Settings. Defaults to 5.
+            max_guesses (int, optional): Current max guesses setting as set in Game Settings. Defaults to 6.
+        """
         self.secret_word_list = []
         self.secret_word = ""
         self.current_guess = ""

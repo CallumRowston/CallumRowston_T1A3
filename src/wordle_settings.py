@@ -15,12 +15,11 @@ def game_settings_menu():
     setting_options = ["Set Word Length", "Set Max Guesses", "Reset To Default Settings", "Back To Main Menu"]
     setting_menu_display = TerminalMenu(setting_options)
     menu_entry_index = setting_menu_display.show()
+    wordle_game.clear_screen()
     if setting_options[menu_entry_index] == "Set Word Length":
-        wordle_game.clear_screen()
         wordle_game.WORD_LENGTH_SETTING = settings_user_input('Word Length', 5, 9)
         game_settings_menu()
     elif setting_options[menu_entry_index] == "Set Max Guesses":
-        wordle_game.clear_screen()
         wordle_game.MAX_GUESS_SETTING = settings_user_input('Max Guesses', 6, 10)
         game_settings_menu()
     elif setting_options[menu_entry_index] == "Reset To Default Settings":
@@ -48,7 +47,7 @@ def settings_user_input(setting_description, start_range, end_range):
     """
     print(
         f"\n  ~~ {Fore.GREEN}Set {Fore.YELLOW}{setting_description}{Fore.RESET} ~~\n\n"
-        f"  Enter a number {start_range} - {end_range - 1} to set the games {setting_description} to that number.\n"
+        f"  Enter a number {start_range} - {end_range - 1} to set\n  the games {setting_description} to that number.\n"
         f"  {start_range} is the default {setting_description}.\n"
         "  Type 'back' to cancel making any changes.\n"
         )

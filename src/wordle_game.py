@@ -31,7 +31,6 @@ def main_menu():
     elif options[menu_entry_index] == "Stats":
         wordle_stats.display_stats()
     elif options[menu_entry_index] == "Quit":
-        clear_screen()
         quit_messager()
 
 def play_pywordle():
@@ -48,7 +47,7 @@ def play_pywordle():
         else:
             clear_screen()
             wordle.display_colored_guess(wordle.compare_user_guess())
-            if wordle.user_wins or wordle.user_loses and wordle.is_default:
+            if not wordle.play_wordle and wordle.is_default:
                 wordle.add_game_stats()
             if wordle.user_wins:
                 if wordle.guess_count == 1:
@@ -60,6 +59,8 @@ def play_pywordle():
                 print("  You have used all your guesses. Game over!")
                 print(f"  The correct word was {wordle.secret_word}\n")
                 end_menu()
+            
+            
 
 def end_menu():
     """Displays menu upon game end."""
